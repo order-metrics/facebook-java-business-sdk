@@ -327,7 +327,7 @@ public class APIRequest<T extends APINode> {
     return result.toString();
   }
 
-  private static String convertToString(Object input) {
+  public static String convertToString(Object input) {
     if (input == null) {
       return "null";
     } else if (input instanceof Map) {
