@@ -157,7 +157,7 @@ public class Profile extends APINode {
         context.log("[Warning] When parsing response, object is not consistent with JSON:");
         context.log("[JSON]" + o1);
         context.log("[Object]" + o2);
-      };
+      }
     }
     profile.context = context;
     profile.rawValue = json;
@@ -760,7 +760,7 @@ public class Profile extends APINode {
       VALUE_PAGE("page"),
       @SerializedName("user")
       VALUE_USER("user"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -793,7 +793,7 @@ public class Profile extends APINode {
       VALUE_THANKFUL("THANKFUL"),
       @SerializedName("WOW")
       VALUE_WOW("WOW"),
-      NULL(null);
+      ;
 
       private String value;
 

@@ -57,10 +57,10 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class Hotel extends APINode {
   @SerializedName("address")
   private String mAddress = null;
-  @SerializedName("applinks")
-  private AppLinks mApplinks = null;
   @SerializedName("brand")
   private String mBrand = null;
+  @SerializedName("category")
+  private String mCategory = null;
   @SerializedName("currency")
   private String mCurrency = null;
   @SerializedName("description")
@@ -171,7 +171,7 @@ public class Hotel extends APINode {
         context.log("[Warning] When parsing response, object is not consistent with JSON:");
         context.log("[JSON]" + o1);
         context.log("[Object]" + o2);
-      };
+      }
     }
     hotel.context = context;
     hotel.rawValue = json;
@@ -321,15 +321,12 @@ public class Hotel extends APINode {
     return mAddress;
   }
 
-  public AppLinks getFieldApplinks() {
-    if (mApplinks != null) {
-      mApplinks.context = getContext();
-    }
-    return mApplinks;
-  }
-
   public String getFieldBrand() {
     return mBrand;
+  }
+
+  public String getFieldCategory() {
+    return mCategory;
   }
 
   public String getFieldCurrency() {
@@ -405,7 +402,6 @@ public class Hotel extends APINode {
     };
 
     public static final String[] FIELDS = {
-      "applinks",
       "base_price",
       "currency",
       "description",
@@ -507,13 +503,6 @@ public class Hotel extends APINode {
       return this;
     }
 
-    public APIRequestGetHotelRooms requestApplinksField () {
-      return this.requestApplinksField(true);
-    }
-    public APIRequestGetHotelRooms requestApplinksField (boolean value) {
-      this.requestField("applinks", value);
-      return this;
-    }
     public APIRequestGetHotelRooms requestBasePriceField () {
       return this.requestBasePriceField(true);
     }
@@ -702,8 +691,8 @@ public class Hotel extends APINode {
 
     public static final String[] FIELDS = {
       "address",
-      "applinks",
       "brand",
+      "category",
       "currency",
       "description",
       "guest_ratings",
@@ -817,18 +806,18 @@ public class Hotel extends APINode {
       this.requestField("address", value);
       return this;
     }
-    public APIRequestGet requestApplinksField () {
-      return this.requestApplinksField(true);
-    }
-    public APIRequestGet requestApplinksField (boolean value) {
-      this.requestField("applinks", value);
-      return this;
-    }
     public APIRequestGet requestBrandField () {
       return this.requestBrandField(true);
     }
     public APIRequestGet requestBrandField (boolean value) {
       this.requestField("brand", value);
+      return this;
+    }
+    public APIRequestGet requestCategoryField () {
+      return this.requestCategoryField(true);
+    }
+    public APIRequestGet requestCategoryField (boolean value) {
+      this.requestField("category", value);
       return this;
     }
     public APIRequestGet requestCurrencyField () {
@@ -1154,8 +1143,8 @@ public class Hotel extends APINode {
 
   public Hotel copyFrom(Hotel instance) {
     this.mAddress = instance.mAddress;
-    this.mApplinks = instance.mApplinks;
     this.mBrand = instance.mBrand;
+    this.mCategory = instance.mCategory;
     this.mCurrency = instance.mCurrency;
     this.mDescription = instance.mDescription;
     this.mGuestRatings = instance.mGuestRatings;

@@ -155,7 +155,7 @@ public class AdRule extends APINode {
         context.log("[Warning] When parsing response, object is not consistent with JSON:");
         context.log("[JSON]" + o1);
         context.log("[Object]" + o2);
-      };
+      }
     }
     adRule.context = context;
     adRule.rawValue = json;
@@ -1201,7 +1201,7 @@ public class AdRule extends APINode {
       VALUE_DISABLED("DISABLED"),
       @SerializedName("ENABLED")
       VALUE_ENABLED("ENABLED"),
-      NULL(null);
+      ;
 
       private String value;
 

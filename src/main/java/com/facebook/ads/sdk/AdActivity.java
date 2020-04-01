@@ -100,7 +100,7 @@ public class AdActivity extends APINode {
         context.log("[Warning] When parsing response, object is not consistent with JSON:");
         context.log("[JSON]" + o1);
         context.log("[Object]" + o2);
-      };
+      }
     }
     adActivity.context = context;
     adActivity.rawValue = json;
@@ -383,6 +383,8 @@ public class AdActivity extends APINode {
       VALUE_CAMPAIGN_ENDED("campaign_ended"),
       @SerializedName("campaign_spending_limit_reached")
       VALUE_CAMPAIGN_SPENDING_LIMIT_REACHED("campaign_spending_limit_reached"),
+      @SerializedName("conversion_event_updated")
+      VALUE_CONVERSION_EVENT_UPDATED("conversion_event_updated"),
       @SerializedName("create_ad")
       VALUE_CREATE_AD("create_ad"),
       @SerializedName("create_ad_set")
@@ -449,12 +451,16 @@ public class AdActivity extends APINode {
       VALUE_UPDATE_AD_SET_BUDGET("update_ad_set_budget"),
       @SerializedName("update_ad_set_duration")
       VALUE_UPDATE_AD_SET_DURATION("update_ad_set_duration"),
+      @SerializedName("update_ad_set_min_spend_target")
+      VALUE_UPDATE_AD_SET_MIN_SPEND_TARGET("update_ad_set_min_spend_target"),
       @SerializedName("update_ad_set_name")
       VALUE_UPDATE_AD_SET_NAME("update_ad_set_name"),
       @SerializedName("update_ad_set_optimization_goal")
       VALUE_UPDATE_AD_SET_OPTIMIZATION_GOAL("update_ad_set_optimization_goal"),
       @SerializedName("update_ad_set_run_status")
       VALUE_UPDATE_AD_SET_RUN_STATUS("update_ad_set_run_status"),
+      @SerializedName("update_ad_set_spend_cap")
+      VALUE_UPDATE_AD_SET_SPEND_CAP("update_ad_set_spend_cap"),
       @SerializedName("update_ad_set_target_spec")
       VALUE_UPDATE_AD_SET_TARGET_SPEC("update_ad_set_target_spec"),
       @SerializedName("update_ad_targets_spec")
@@ -481,7 +487,9 @@ public class AdActivity extends APINode {
       VALUE_UPDATE_CAMPAIGN_NAME("update_campaign_name"),
       @SerializedName("update_campaign_run_status")
       VALUE_UPDATE_CAMPAIGN_RUN_STATUS("update_campaign_run_status"),
-      NULL(null);
+      @SerializedName("update_campaign_schedule")
+      VALUE_UPDATE_CAMPAIGN_SCHEDULE("update_campaign_schedule"),
+      ;
 
       private String value;
 
@@ -518,7 +526,7 @@ public class AdActivity extends APINode {
       VALUE_STATUS("STATUS"),
       @SerializedName("TARGETING")
       VALUE_TARGETING("TARGETING"),
-      NULL(null);
+      ;
 
       private String value;
 

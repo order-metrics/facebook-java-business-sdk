@@ -247,7 +247,7 @@ public class AdCampaignActivity extends APINode {
         context.log("[Warning] When parsing response, object is not consistent with JSON:");
         context.log("[JSON]" + o1);
         context.log("[Object]" + o2);
-      };
+      }
     }
     adCampaignActivity.context = context;
     adCampaignActivity.rawValue = json;
@@ -1166,7 +1166,7 @@ public class AdCampaignActivity extends APINode {
       VALUE_LOWEST_COST_WITH_BID_CAP("LOWEST_COST_WITH_BID_CAP"),
       @SerializedName("TARGET_COST")
       VALUE_TARGET_COST("TARGET_COST"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -1187,7 +1187,7 @@ public class AdCampaignActivity extends APINode {
       VALUE_LOWEST_COST_WITH_BID_CAP("LOWEST_COST_WITH_BID_CAP"),
       @SerializedName("TARGET_COST")
       VALUE_TARGET_COST("TARGET_COST"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -1220,9 +1220,7 @@ public class AdCampaignActivity extends APINode {
       VALUE_POST_ENGAGEMENT("POST_ENGAGEMENT"),
       @SerializedName("THRUPLAY")
       VALUE_THRUPLAY("THRUPLAY"),
-      @SerializedName("VIDEO_VIEWS")
-      VALUE_VIDEO_VIEWS("VIDEO_VIEWS"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -1255,9 +1253,7 @@ public class AdCampaignActivity extends APINode {
       VALUE_POST_ENGAGEMENT("POST_ENGAGEMENT"),
       @SerializedName("THRUPLAY")
       VALUE_THRUPLAY("THRUPLAY"),
-      @SerializedName("VIDEO_VIEWS")
-      VALUE_VIDEO_VIEWS("VIDEO_VIEWS"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -1320,9 +1316,9 @@ public class AdCampaignActivity extends APINode {
       VALUE_TWO_SECOND_CONTINUOUS_VIDEO_VIEWS("TWO_SECOND_CONTINUOUS_VIDEO_VIEWS"),
       @SerializedName("VALUE")
       VALUE_VALUE("VALUE"),
-      @SerializedName("VIDEO_VIEWS")
-      VALUE_VIDEO_VIEWS("VIDEO_VIEWS"),
-      NULL(null);
+      @SerializedName("VISIT_INSTAGRAM_PROFILE")
+      VALUE_VISIT_INSTAGRAM_PROFILE("VISIT_INSTAGRAM_PROFILE"),
+      ;
 
       private String value;
 
@@ -1385,9 +1381,9 @@ public class AdCampaignActivity extends APINode {
       VALUE_TWO_SECOND_CONTINUOUS_VIDEO_VIEWS("TWO_SECOND_CONTINUOUS_VIDEO_VIEWS"),
       @SerializedName("VALUE")
       VALUE_VALUE("VALUE"),
-      @SerializedName("VIDEO_VIEWS")
-      VALUE_VIDEO_VIEWS("VIDEO_VIEWS"),
-      NULL(null);
+      @SerializedName("VISIT_INSTAGRAM_PROFILE")
+      VALUE_VISIT_INSTAGRAM_PROFILE("VISIT_INSTAGRAM_PROFILE"),
+      ;
 
       private String value;
 

@@ -80,7 +80,7 @@ public class Permission extends APINode {
         context.log("[Warning] When parsing response, object is not consistent with JSON:");
         context.log("[JSON]" + o1);
         context.log("[Object]" + o2);
-      };
+      }
     }
     permission.context = context;
     permission.rawValue = json;
@@ -233,9 +233,11 @@ public class Permission extends APINode {
   public static enum EnumStatus {
       @SerializedName("declined")
       VALUE_DECLINED("declined"),
+      @SerializedName("expired")
+      VALUE_EXPIRED("expired"),
       @SerializedName("granted")
       VALUE_GRANTED("granted"),
-      NULL(null);
+      ;
 
       private String value;
 

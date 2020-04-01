@@ -59,6 +59,8 @@ public class AdPromotedObject extends APINode {
   private String mApplicationId = null;
   @SerializedName("custom_conversion_id")
   private String mCustomConversionId = null;
+  @SerializedName("custom_event_str")
+  private String mCustomEventStr = null;
   @SerializedName("custom_event_type")
   private EnumCustomEventType mCustomEventType = null;
   @SerializedName("event_id")
@@ -110,7 +112,7 @@ public class AdPromotedObject extends APINode {
         context.log("[Warning] When parsing response, object is not consistent with JSON:");
         context.log("[JSON]" + o1);
         context.log("[Object]" + o2);
-      };
+      }
     }
     adPromotedObject.context = context;
     adPromotedObject.rawValue = json;
@@ -255,6 +257,15 @@ public class AdPromotedObject extends APINode {
 
   public AdPromotedObject setFieldCustomConversionId(String value) {
     this.mCustomConversionId = value;
+    return this;
+  }
+
+  public String getFieldCustomEventStr() {
+    return mCustomEventStr;
+  }
+
+  public AdPromotedObject setFieldCustomEventStr(String value) {
+    this.mCustomEventStr = value;
     return this;
   }
 
@@ -452,7 +463,7 @@ public class AdPromotedObject extends APINode {
       VALUE_SUBSCRIBE("SUBSCRIBE"),
       @SerializedName("TUTORIAL_COMPLETION")
       VALUE_TUTORIAL_COMPLETION("TUTORIAL_COMPLETION"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -483,6 +494,7 @@ public class AdPromotedObject extends APINode {
   public AdPromotedObject copyFrom(AdPromotedObject instance) {
     this.mApplicationId = instance.mApplicationId;
     this.mCustomConversionId = instance.mCustomConversionId;
+    this.mCustomEventStr = instance.mCustomEventStr;
     this.mCustomEventType = instance.mCustomEventType;
     this.mEventId = instance.mEventId;
     this.mFundraiserCampaignId = instance.mFundraiserCampaignId;

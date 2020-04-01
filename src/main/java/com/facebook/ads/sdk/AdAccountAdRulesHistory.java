@@ -94,7 +94,7 @@ public class AdAccountAdRulesHistory extends APINode {
         context.log("[Warning] When parsing response, object is not consistent with JSON:");
         context.log("[JSON]" + o1);
         context.log("[Object]" + o2);
-      };
+      }
     }
     adAccountAdRulesHistory.context = context;
     adAccountAdRulesHistory.rawValue = json;
@@ -350,7 +350,7 @@ public class AdAccountAdRulesHistory extends APINode {
       VALUE_PAUSED("PAUSED"),
       @SerializedName("UNPAUSED")
       VALUE_UNPAUSED("UNPAUSED"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -369,7 +369,7 @@ public class AdAccountAdRulesHistory extends APINode {
       VALUE_SCHEDULE("SCHEDULE"),
       @SerializedName("TRIGGER")
       VALUE_TRIGGER("TRIGGER"),
-      NULL(null);
+      ;
 
       private String value;
 

@@ -141,7 +141,7 @@ public class CPASParentCatalogSettings extends APINode {
         context.log("[Warning] When parsing response, object is not consistent with JSON:");
         context.log("[JSON]" + o1);
         context.log("[Object]" + o2);
-      };
+      }
     }
     cpasParentCatalogSettings.context = context;
     cpasParentCatalogSettings.rawValue = json;
@@ -550,7 +550,7 @@ public class CPASParentCatalogSettings extends APINode {
       VALUE_X7D_CLICK("X7D_CLICK"),
       @SerializedName("X7D_VIEW")
       VALUE_X7D_VIEW("X7D_VIEW"),
-      NULL(null);
+      ;
 
       private String value;
 

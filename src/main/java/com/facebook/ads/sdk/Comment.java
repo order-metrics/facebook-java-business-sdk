@@ -69,6 +69,8 @@ public class Comment extends APINode {
   private Boolean mCanLike = null;
   @SerializedName("can_remove")
   private Boolean mCanRemove = null;
+  @SerializedName("can_reply_privately")
+  private Boolean mCanReplyPrivately = null;
   @SerializedName("comment_count")
   private Long mCommentCount = null;
   @SerializedName("created_time")
@@ -95,6 +97,8 @@ public class Comment extends APINode {
   private Comment mParent = null;
   @SerializedName("permalink_url")
   private String mPermalinkUrl = null;
+  @SerializedName("private_reply_conversation")
+  private Object mPrivateReplyConversation = null;
   @SerializedName("user_likes")
   private Boolean mUserLikes = null;
   protected static Gson gson = null;
@@ -177,7 +181,7 @@ public class Comment extends APINode {
         context.log("[Warning] When parsing response, object is not consistent with JSON:");
         context.log("[JSON]" + o1);
         context.log("[Object]" + o2);
-      };
+      }
     }
     comment.context = context;
     comment.rawValue = json;
@@ -310,12 +314,12 @@ public class Comment extends APINode {
     return new APIRequestGetComments(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestDeleteLikes deleteLikes() {
-    return new APIRequestDeleteLikes(this.getPrefixedId().toString(), context);
+  public APIRequestCreateComment createComment() {
+    return new APIRequestCreateComment(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestGetLikes getLikes() {
-    return new APIRequestGetLikes(this.getPrefixedId().toString(), context);
+  public APIRequestDeleteLikes deleteLikes() {
+    return new APIRequestDeleteLikes(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestCreateLike createLike() {
@@ -373,6 +377,10 @@ public class Comment extends APINode {
     return mCanRemove;
   }
 
+  public Boolean getFieldCanReplyPrivately() {
+    return mCanReplyPrivately;
+  }
+
   public Long getFieldCommentCount() {
     return mCommentCount;
   }
@@ -428,6 +436,10 @@ public class Comment extends APINode {
     return mPermalinkUrl;
   }
 
+  public Object getFieldPrivateReplyConversation() {
+    return mPrivateReplyConversation;
+  }
+
   public Boolean getFieldUserLikes() {
     return mUserLikes;
   }
@@ -456,6 +468,7 @@ public class Comment extends APINode {
       "can_hide",
       "can_like",
       "can_remove",
+      "can_reply_privately",
       "comment_count",
       "created_time",
       "from",
@@ -469,6 +482,7 @@ public class Comment extends APINode {
       "object",
       "parent",
       "permalink_url",
+      "private_reply_conversation",
       "user_likes",
     };
 
@@ -642,6 +656,13 @@ public class Comment extends APINode {
       this.requestField("can_remove", value);
       return this;
     }
+    public APIRequestGetComments requestCanReplyPrivatelyField () {
+      return this.requestCanReplyPrivatelyField(true);
+    }
+    public APIRequestGetComments requestCanReplyPrivatelyField (boolean value) {
+      this.requestField("can_reply_privately", value);
+      return this;
+    }
     public APIRequestGetComments requestCommentCountField () {
       return this.requestCommentCountField(true);
     }
@@ -733,6 +754,13 @@ public class Comment extends APINode {
       this.requestField("permalink_url", value);
       return this;
     }
+    public APIRequestGetComments requestPrivateReplyConversationField () {
+      return this.requestPrivateReplyConversationField(true);
+    }
+    public APIRequestGetComments requestPrivateReplyConversationField (boolean value) {
+      this.requestField("private_reply_conversation", value);
+      return this;
+    }
     public APIRequestGetComments requestUserLikesField () {
       return this.requestUserLikesField(true);
     }
@@ -740,6 +768,204 @@ public class Comment extends APINode {
       this.requestField("user_likes", value);
       return this;
     }
+  }
+
+  public static class APIRequestCreateComment extends APIRequest<Comment> {
+
+    Comment lastResponse = null;
+    @Override
+    public Comment getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "attachment_id",
+      "attachment_share_url",
+      "attachment_url",
+      "comment_privacy_value",
+      "facepile_mentioned_ids",
+      "feedback_source",
+      "is_offline",
+      "message",
+      "nectar_module",
+      "object_id",
+      "parent_comment_id",
+      "text",
+      "tracking",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public Comment parseResponse(String response, String header) throws APIException {
+      return Comment.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public Comment execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public Comment execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<Comment> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<Comment> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, Comment>() {
+           public Comment apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateComment.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreateComment(String nodeId, APIContext context) {
+      super(context, nodeId, "/comments", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateComment setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateComment setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateComment setAttachmentId (String attachmentId) {
+      this.setParam("attachment_id", attachmentId);
+      return this;
+    }
+
+    public APIRequestCreateComment setAttachmentShareUrl (String attachmentShareUrl) {
+      this.setParam("attachment_share_url", attachmentShareUrl);
+      return this;
+    }
+
+    public APIRequestCreateComment setAttachmentUrl (String attachmentUrl) {
+      this.setParam("attachment_url", attachmentUrl);
+      return this;
+    }
+
+    public APIRequestCreateComment setCommentPrivacyValue (Comment.EnumCommentPrivacyValue commentPrivacyValue) {
+      this.setParam("comment_privacy_value", commentPrivacyValue);
+      return this;
+    }
+    public APIRequestCreateComment setCommentPrivacyValue (String commentPrivacyValue) {
+      this.setParam("comment_privacy_value", commentPrivacyValue);
+      return this;
+    }
+
+    public APIRequestCreateComment setFacepileMentionedIds (List<String> facepileMentionedIds) {
+      this.setParam("facepile_mentioned_ids", facepileMentionedIds);
+      return this;
+    }
+    public APIRequestCreateComment setFacepileMentionedIds (String facepileMentionedIds) {
+      this.setParam("facepile_mentioned_ids", facepileMentionedIds);
+      return this;
+    }
+
+    public APIRequestCreateComment setFeedbackSource (String feedbackSource) {
+      this.setParam("feedback_source", feedbackSource);
+      return this;
+    }
+
+    public APIRequestCreateComment setIsOffline (Boolean isOffline) {
+      this.setParam("is_offline", isOffline);
+      return this;
+    }
+    public APIRequestCreateComment setIsOffline (String isOffline) {
+      this.setParam("is_offline", isOffline);
+      return this;
+    }
+
+    public APIRequestCreateComment setMessage (String message) {
+      this.setParam("message", message);
+      return this;
+    }
+
+    public APIRequestCreateComment setNectarModule (String nectarModule) {
+      this.setParam("nectar_module", nectarModule);
+      return this;
+    }
+
+    public APIRequestCreateComment setObjectId (String objectId) {
+      this.setParam("object_id", objectId);
+      return this;
+    }
+
+    public APIRequestCreateComment setParentCommentId (Object parentCommentId) {
+      this.setParam("parent_comment_id", parentCommentId);
+      return this;
+    }
+    public APIRequestCreateComment setParentCommentId (String parentCommentId) {
+      this.setParam("parent_comment_id", parentCommentId);
+      return this;
+    }
+
+    public APIRequestCreateComment setText (String text) {
+      this.setParam("text", text);
+      return this;
+    }
+
+    public APIRequestCreateComment setTracking (String tracking) {
+      this.setParam("tracking", tracking);
+      return this;
+    }
+
+    public APIRequestCreateComment requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateComment requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateComment requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateComment requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateComment requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateComment requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
   }
 
   public static class APIRequestDeleteLikes extends APIRequest<APINode> {
@@ -862,198 +1088,6 @@ public class Comment extends APINode {
       return this;
     }
 
-  }
-
-  public static class APIRequestGetLikes extends APIRequest<Profile> {
-
-    APINodeList<Profile> lastResponse = null;
-    @Override
-    public APINodeList<Profile> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "can_post",
-      "id",
-      "link",
-      "name",
-      "pic",
-      "pic_crop",
-      "pic_large",
-      "pic_small",
-      "pic_square",
-      "profile_type",
-      "username",
-    };
-
-    @Override
-    public APINodeList<Profile> parseResponse(String response, String header) throws APIException {
-      return Profile.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<Profile> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<Profile> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<Profile>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<Profile>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<Profile>>() {
-           public APINodeList<Profile> apply(ResponseWrapper result) {
-             try {
-               return APIRequestGetLikes.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGetLikes(String nodeId, APIContext context) {
-      super(context, nodeId, "/likes", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetLikes setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetLikes setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetLikes requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetLikes requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetLikes requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetLikes requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetLikes requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetLikes requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGetLikes requestCanPostField () {
-      return this.requestCanPostField(true);
-    }
-    public APIRequestGetLikes requestCanPostField (boolean value) {
-      this.requestField("can_post", value);
-      return this;
-    }
-    public APIRequestGetLikes requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetLikes requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
-    public APIRequestGetLikes requestLinkField () {
-      return this.requestLinkField(true);
-    }
-    public APIRequestGetLikes requestLinkField (boolean value) {
-      this.requestField("link", value);
-      return this;
-    }
-    public APIRequestGetLikes requestNameField () {
-      return this.requestNameField(true);
-    }
-    public APIRequestGetLikes requestNameField (boolean value) {
-      this.requestField("name", value);
-      return this;
-    }
-    public APIRequestGetLikes requestPicField () {
-      return this.requestPicField(true);
-    }
-    public APIRequestGetLikes requestPicField (boolean value) {
-      this.requestField("pic", value);
-      return this;
-    }
-    public APIRequestGetLikes requestPicCropField () {
-      return this.requestPicCropField(true);
-    }
-    public APIRequestGetLikes requestPicCropField (boolean value) {
-      this.requestField("pic_crop", value);
-      return this;
-    }
-    public APIRequestGetLikes requestPicLargeField () {
-      return this.requestPicLargeField(true);
-    }
-    public APIRequestGetLikes requestPicLargeField (boolean value) {
-      this.requestField("pic_large", value);
-      return this;
-    }
-    public APIRequestGetLikes requestPicSmallField () {
-      return this.requestPicSmallField(true);
-    }
-    public APIRequestGetLikes requestPicSmallField (boolean value) {
-      this.requestField("pic_small", value);
-      return this;
-    }
-    public APIRequestGetLikes requestPicSquareField () {
-      return this.requestPicSquareField(true);
-    }
-    public APIRequestGetLikes requestPicSquareField (boolean value) {
-      this.requestField("pic_square", value);
-      return this;
-    }
-    public APIRequestGetLikes requestProfileTypeField () {
-      return this.requestProfileTypeField(true);
-    }
-    public APIRequestGetLikes requestProfileTypeField (boolean value) {
-      this.requestField("profile_type", value);
-      return this;
-    }
-    public APIRequestGetLikes requestUsernameField () {
-      return this.requestUsernameField(true);
-    }
-    public APIRequestGetLikes requestUsernameField (boolean value) {
-      this.requestField("username", value);
-      return this;
-    }
   }
 
   public static class APIRequestCreateLike extends APIRequest<Comment> {
@@ -1502,6 +1536,7 @@ public class Comment extends APINode {
       "can_hide",
       "can_like",
       "can_remove",
+      "can_reply_privately",
       "comment_count",
       "created_time",
       "from",
@@ -1515,6 +1550,7 @@ public class Comment extends APINode {
       "object",
       "parent",
       "permalink_url",
+      "private_reply_conversation",
       "user_likes",
     };
 
@@ -1656,6 +1692,13 @@ public class Comment extends APINode {
       this.requestField("can_remove", value);
       return this;
     }
+    public APIRequestGet requestCanReplyPrivatelyField () {
+      return this.requestCanReplyPrivatelyField(true);
+    }
+    public APIRequestGet requestCanReplyPrivatelyField (boolean value) {
+      this.requestField("can_reply_privately", value);
+      return this;
+    }
     public APIRequestGet requestCommentCountField () {
       return this.requestCommentCountField(true);
     }
@@ -1745,6 +1788,13 @@ public class Comment extends APINode {
     }
     public APIRequestGet requestPermalinkUrlField (boolean value) {
       this.requestField("permalink_url", value);
+      return this;
+    }
+    public APIRequestGet requestPrivateReplyConversationField () {
+      return this.requestPrivateReplyConversationField(true);
+    }
+    public APIRequestGet requestPrivateReplyConversationField (boolean value) {
+      this.requestField("private_reply_conversation", value);
       return this;
     }
     public APIRequestGet requestUserLikesField () {
@@ -1909,7 +1959,7 @@ public class Comment extends APINode {
       VALUE_SIDE_CONVERSATION("SIDE_CONVERSATION"),
       @SerializedName("SIDE_CONVERSATION_AND_POST_OWNER")
       VALUE_SIDE_CONVERSATION_AND_POST_OWNER("SIDE_CONVERSATION_AND_POST_OWNER"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -1928,7 +1978,7 @@ public class Comment extends APINode {
       VALUE_STREAM("stream"),
       @SerializedName("toplevel")
       VALUE_TOPLEVEL("toplevel"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -1947,7 +1997,7 @@ public class Comment extends APINode {
       VALUE_FILTER_LOW_QUALITY("filter_low_quality"),
       @SerializedName("no_filter")
       VALUE_NO_FILTER("no_filter"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -1966,7 +2016,7 @@ public class Comment extends APINode {
       VALUE_CHRONOLOGICAL("chronological"),
       @SerializedName("reverse_chronological")
       VALUE_REVERSE_CHRONOLOGICAL("reverse_chronological"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -2002,6 +2052,7 @@ public class Comment extends APINode {
     this.mCanHide = instance.mCanHide;
     this.mCanLike = instance.mCanLike;
     this.mCanRemove = instance.mCanRemove;
+    this.mCanReplyPrivately = instance.mCanReplyPrivately;
     this.mCommentCount = instance.mCommentCount;
     this.mCreatedTime = instance.mCreatedTime;
     this.mFrom = instance.mFrom;
@@ -2015,6 +2066,7 @@ public class Comment extends APINode {
     this.mObject = instance.mObject;
     this.mParent = instance.mParent;
     this.mPermalinkUrl = instance.mPermalinkUrl;
+    this.mPrivateReplyConversation = instance.mPrivateReplyConversation;
     this.mUserLikes = instance.mUserLikes;
     this.context = instance.context;
     this.rawValue = instance.rawValue;

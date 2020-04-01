@@ -85,6 +85,8 @@ public class VideoCopyright extends APINode {
   private String mReferenceOwnerId = null;
   @SerializedName("rule_ids")
   private List<VideoCopyrightRule> mRuleIds = null;
+  @SerializedName("tags")
+  private List<String> mTags = null;
   @SerializedName("whitelisted_ids")
   private List<String> mWhitelistedIds = null;
   protected static Gson gson = null;
@@ -167,7 +169,7 @@ public class VideoCopyright extends APINode {
         context.log("[Warning] When parsing response, object is not consistent with JSON:");
         context.log("[JSON]" + o1);
         context.log("[Object]" + o2);
-      };
+      }
     }
     videoCopyright.context = context;
     videoCopyright.rawValue = json;
@@ -368,6 +370,10 @@ public class VideoCopyright extends APINode {
     return mRuleIds;
   }
 
+  public List<String> getFieldTags() {
+    return mTags;
+  }
+
   public List<String> getFieldWhitelistedIds() {
     return mWhitelistedIds;
   }
@@ -400,6 +406,7 @@ public class VideoCopyright extends APINode {
       "reference_file_expired",
       "reference_owner_id",
       "rule_ids",
+      "tags",
       "whitelisted_ids",
     };
 
@@ -595,6 +602,13 @@ public class VideoCopyright extends APINode {
     }
     public APIRequestGet requestRuleIdsField (boolean value) {
       this.requestField("rule_ids", value);
+      return this;
+    }
+    public APIRequestGet requestTagsField () {
+      return this.requestTagsField(true);
+    }
+    public APIRequestGet requestTagsField (boolean value) {
+      this.requestField("tags", value);
       return this;
     }
     public APIRequestGet requestWhitelistedIdsField () {
@@ -819,7 +833,7 @@ public class VideoCopyright extends APINode {
       VALUE_MOVIE("movie"),
       @SerializedName("web")
       VALUE_WEB("web"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -840,7 +854,7 @@ public class VideoCopyright extends APINode {
       VALUE_VIDEO_AND_AUDIO("VIDEO_AND_AUDIO"),
       @SerializedName("VIDEO_ONLY")
       VALUE_VIDEO_ONLY("VIDEO_ONLY"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -884,6 +898,7 @@ public class VideoCopyright extends APINode {
     this.mReferenceFileExpired = instance.mReferenceFileExpired;
     this.mReferenceOwnerId = instance.mReferenceOwnerId;
     this.mRuleIds = instance.mRuleIds;
+    this.mTags = instance.mTags;
     this.mWhitelistedIds = instance.mWhitelistedIds;
     this.context = instance.context;
     this.rawValue = instance.rawValue;

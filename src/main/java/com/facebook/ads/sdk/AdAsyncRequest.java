@@ -153,7 +153,7 @@ public class AdAsyncRequest extends APINode {
         context.log("[Warning] When parsing response, object is not consistent with JSON:");
         context.log("[JSON]" + o1);
         context.log("[Object]" + o2);
-      };
+      }
     }
     adAsyncRequest.context = context;
     adAsyncRequest.rawValue = json;
@@ -631,7 +631,11 @@ public class AdAsyncRequest extends APINode {
       VALUE_PENDING_DEPENDENCY("PENDING_DEPENDENCY"),
       @SerializedName("SUCCESS")
       VALUE_SUCCESS("SUCCESS"),
-      NULL(null);
+      @SerializedName("USER_CANCELED")
+      VALUE_USER_CANCELED("USER_CANCELED"),
+      @SerializedName("USER_CANCELED_DEPENDENCY")
+      VALUE_USER_CANCELED_DEPENDENCY("USER_CANCELED_DEPENDENCY"),
+      ;
 
       private String value;
 

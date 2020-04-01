@@ -161,7 +161,7 @@ public class ProductFeedUpload extends APINode {
         context.log("[Warning] When parsing response, object is not consistent with JSON:");
         context.log("[JSON]" + o1);
         context.log("[Object]" + o2);
-      };
+      }
     }
     productFeedUpload.context = context;
     productFeedUpload.rawValue = json;
@@ -830,6 +830,8 @@ public class ProductFeedUpload extends APINode {
   }
 
   public static enum EnumInputMethod {
+      @SerializedName("Google Sheets Fetch")
+      VALUE_GOOGLE_SHEETS_FETCH("Google Sheets Fetch"),
       @SerializedName("Manual Upload")
       VALUE_MANUAL_UPLOAD("Manual Upload"),
       @SerializedName("Reupload Last File")
@@ -838,7 +840,7 @@ public class ProductFeedUpload extends APINode {
       VALUE_SERVER_FETCH("Server Fetch"),
       @SerializedName("User initiated server fetch")
       VALUE_USER_INITIATED_SERVER_FETCH("User initiated server fetch"),
-      NULL(null);
+      ;
 
       private String value;
 

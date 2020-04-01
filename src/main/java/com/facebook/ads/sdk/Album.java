@@ -181,7 +181,7 @@ public class Album extends APINode {
         context.log("[Warning] When parsing response, object is not consistent with JSON:");
         context.log("[JSON]" + o1);
         context.log("[Object]" + o2);
-      };
+      }
     }
     album.context = context;
     album.rawValue = json;
@@ -318,10 +318,6 @@ public class Album extends APINode {
     return new APIRequestCreateComment(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestGetLikes getLikes() {
-    return new APIRequestGetLikes(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestCreateLike createLike() {
     return new APIRequestCreateLike(this.getPrefixedId().toString(), context);
   }
@@ -336,10 +332,6 @@ public class Album extends APINode {
 
   public APIRequestGetPicture getPicture() {
     return new APIRequestGetPicture(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestGetReactions getReactions() {
-    return new APIRequestGetReactions(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetSharedPosts getSharedPosts() {
@@ -476,6 +468,7 @@ public class Album extends APINode {
       "can_hide",
       "can_like",
       "can_remove",
+      "can_reply_privately",
       "comment_count",
       "created_time",
       "from",
@@ -489,6 +482,7 @@ public class Album extends APINode {
       "object",
       "parent",
       "permalink_url",
+      "private_reply_conversation",
       "user_likes",
     };
 
@@ -662,6 +656,13 @@ public class Album extends APINode {
       this.requestField("can_remove", value);
       return this;
     }
+    public APIRequestGetComments requestCanReplyPrivatelyField () {
+      return this.requestCanReplyPrivatelyField(true);
+    }
+    public APIRequestGetComments requestCanReplyPrivatelyField (boolean value) {
+      this.requestField("can_reply_privately", value);
+      return this;
+    }
     public APIRequestGetComments requestCommentCountField () {
       return this.requestCommentCountField(true);
     }
@@ -751,6 +752,13 @@ public class Album extends APINode {
     }
     public APIRequestGetComments requestPermalinkUrlField (boolean value) {
       this.requestField("permalink_url", value);
+      return this;
+    }
+    public APIRequestGetComments requestPrivateReplyConversationField () {
+      return this.requestPrivateReplyConversationField(true);
+    }
+    public APIRequestGetComments requestPrivateReplyConversationField (boolean value) {
+      this.requestField("private_reply_conversation", value);
       return this;
     }
     public APIRequestGetComments requestUserLikesField () {
@@ -958,198 +966,6 @@ public class Album extends APINode {
       return this;
     }
 
-  }
-
-  public static class APIRequestGetLikes extends APIRequest<Profile> {
-
-    APINodeList<Profile> lastResponse = null;
-    @Override
-    public APINodeList<Profile> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "can_post",
-      "id",
-      "link",
-      "name",
-      "pic",
-      "pic_crop",
-      "pic_large",
-      "pic_small",
-      "pic_square",
-      "profile_type",
-      "username",
-    };
-
-    @Override
-    public APINodeList<Profile> parseResponse(String response, String header) throws APIException {
-      return Profile.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<Profile> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<Profile> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<Profile>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<Profile>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<Profile>>() {
-           public APINodeList<Profile> apply(ResponseWrapper result) {
-             try {
-               return APIRequestGetLikes.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGetLikes(String nodeId, APIContext context) {
-      super(context, nodeId, "/likes", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetLikes setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetLikes setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetLikes requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetLikes requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetLikes requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetLikes requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetLikes requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetLikes requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGetLikes requestCanPostField () {
-      return this.requestCanPostField(true);
-    }
-    public APIRequestGetLikes requestCanPostField (boolean value) {
-      this.requestField("can_post", value);
-      return this;
-    }
-    public APIRequestGetLikes requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetLikes requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
-    public APIRequestGetLikes requestLinkField () {
-      return this.requestLinkField(true);
-    }
-    public APIRequestGetLikes requestLinkField (boolean value) {
-      this.requestField("link", value);
-      return this;
-    }
-    public APIRequestGetLikes requestNameField () {
-      return this.requestNameField(true);
-    }
-    public APIRequestGetLikes requestNameField (boolean value) {
-      this.requestField("name", value);
-      return this;
-    }
-    public APIRequestGetLikes requestPicField () {
-      return this.requestPicField(true);
-    }
-    public APIRequestGetLikes requestPicField (boolean value) {
-      this.requestField("pic", value);
-      return this;
-    }
-    public APIRequestGetLikes requestPicCropField () {
-      return this.requestPicCropField(true);
-    }
-    public APIRequestGetLikes requestPicCropField (boolean value) {
-      this.requestField("pic_crop", value);
-      return this;
-    }
-    public APIRequestGetLikes requestPicLargeField () {
-      return this.requestPicLargeField(true);
-    }
-    public APIRequestGetLikes requestPicLargeField (boolean value) {
-      this.requestField("pic_large", value);
-      return this;
-    }
-    public APIRequestGetLikes requestPicSmallField () {
-      return this.requestPicSmallField(true);
-    }
-    public APIRequestGetLikes requestPicSmallField (boolean value) {
-      this.requestField("pic_small", value);
-      return this;
-    }
-    public APIRequestGetLikes requestPicSquareField () {
-      return this.requestPicSquareField(true);
-    }
-    public APIRequestGetLikes requestPicSquareField (boolean value) {
-      this.requestField("pic_square", value);
-      return this;
-    }
-    public APIRequestGetLikes requestProfileTypeField () {
-      return this.requestProfileTypeField(true);
-    }
-    public APIRequestGetLikes requestProfileTypeField (boolean value) {
-      this.requestField("profile_type", value);
-      return this;
-    }
-    public APIRequestGetLikes requestUsernameField () {
-      return this.requestUsernameField(true);
-    }
-    public APIRequestGetLikes requestUsernameField (boolean value) {
-      this.requestField("username", value);
-      return this;
-    }
   }
 
   public static class APIRequestCreateLike extends APIRequest<Album> {
@@ -1633,6 +1449,7 @@ public class Album extends APINode {
       "ios_bundle_id",
       "is_explicit_location",
       "is_explicit_place",
+      "is_visual_search",
       "manual_privacy",
       "message",
       "name",
@@ -1875,6 +1692,15 @@ public class Album extends APINode {
     }
     public APIRequestCreatePhoto setIsExplicitPlace (String isExplicitPlace) {
       this.setParam("is_explicit_place", isExplicitPlace);
+      return this;
+    }
+
+    public APIRequestCreatePhoto setIsVisualSearch (Boolean isVisualSearch) {
+      this.setParam("is_visual_search", isVisualSearch);
+      return this;
+    }
+    public APIRequestCreatePhoto setIsVisualSearch (String isVisualSearch) {
+      this.setParam("is_visual_search", isVisualSearch);
       return this;
     }
 
@@ -2330,208 +2156,6 @@ public class Album extends APINode {
     }
   }
 
-  public static class APIRequestGetReactions extends APIRequest<Profile> {
-
-    APINodeList<Profile> lastResponse = null;
-    @Override
-    public APINodeList<Profile> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "type",
-    };
-
-    public static final String[] FIELDS = {
-      "can_post",
-      "id",
-      "link",
-      "name",
-      "pic",
-      "pic_crop",
-      "pic_large",
-      "pic_small",
-      "pic_square",
-      "profile_type",
-      "username",
-    };
-
-    @Override
-    public APINodeList<Profile> parseResponse(String response, String header) throws APIException {
-      return Profile.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<Profile> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<Profile> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<Profile>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<Profile>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<Profile>>() {
-           public APINodeList<Profile> apply(ResponseWrapper result) {
-             try {
-               return APIRequestGetReactions.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGetReactions(String nodeId, APIContext context) {
-      super(context, nodeId, "/reactions", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetReactions setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetReactions setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetReactions setType (Profile.EnumType type) {
-      this.setParam("type", type);
-      return this;
-    }
-    public APIRequestGetReactions setType (String type) {
-      this.setParam("type", type);
-      return this;
-    }
-
-    public APIRequestGetReactions requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetReactions requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetReactions requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetReactions requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetReactions requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetReactions requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGetReactions requestCanPostField () {
-      return this.requestCanPostField(true);
-    }
-    public APIRequestGetReactions requestCanPostField (boolean value) {
-      this.requestField("can_post", value);
-      return this;
-    }
-    public APIRequestGetReactions requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetReactions requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
-    public APIRequestGetReactions requestLinkField () {
-      return this.requestLinkField(true);
-    }
-    public APIRequestGetReactions requestLinkField (boolean value) {
-      this.requestField("link", value);
-      return this;
-    }
-    public APIRequestGetReactions requestNameField () {
-      return this.requestNameField(true);
-    }
-    public APIRequestGetReactions requestNameField (boolean value) {
-      this.requestField("name", value);
-      return this;
-    }
-    public APIRequestGetReactions requestPicField () {
-      return this.requestPicField(true);
-    }
-    public APIRequestGetReactions requestPicField (boolean value) {
-      this.requestField("pic", value);
-      return this;
-    }
-    public APIRequestGetReactions requestPicCropField () {
-      return this.requestPicCropField(true);
-    }
-    public APIRequestGetReactions requestPicCropField (boolean value) {
-      this.requestField("pic_crop", value);
-      return this;
-    }
-    public APIRequestGetReactions requestPicLargeField () {
-      return this.requestPicLargeField(true);
-    }
-    public APIRequestGetReactions requestPicLargeField (boolean value) {
-      this.requestField("pic_large", value);
-      return this;
-    }
-    public APIRequestGetReactions requestPicSmallField () {
-      return this.requestPicSmallField(true);
-    }
-    public APIRequestGetReactions requestPicSmallField (boolean value) {
-      this.requestField("pic_small", value);
-      return this;
-    }
-    public APIRequestGetReactions requestPicSquareField () {
-      return this.requestPicSquareField(true);
-    }
-    public APIRequestGetReactions requestPicSquareField (boolean value) {
-      this.requestField("pic_square", value);
-      return this;
-    }
-    public APIRequestGetReactions requestProfileTypeField () {
-      return this.requestProfileTypeField(true);
-    }
-    public APIRequestGetReactions requestProfileTypeField (boolean value) {
-      this.requestField("profile_type", value);
-      return this;
-    }
-    public APIRequestGetReactions requestUsernameField () {
-      return this.requestUsernameField(true);
-    }
-    public APIRequestGetReactions requestUsernameField (boolean value) {
-      this.requestField("username", value);
-      return this;
-    }
-  }
-
   public static class APIRequestGetSharedPosts extends APIRequest<Post> {
 
     APINodeList<Post> lastResponse = null;
@@ -2549,6 +2173,7 @@ public class Album extends APINode {
       "application",
       "backdated_time",
       "call_to_action",
+      "can_reply_privately",
       "caption",
       "child_attachments",
       "comments_mirroring_domain",
@@ -2734,6 +2359,13 @@ public class Album extends APINode {
     }
     public APIRequestGetSharedPosts requestCallToActionField (boolean value) {
       this.requestField("call_to_action", value);
+      return this;
+    }
+    public APIRequestGetSharedPosts requestCanReplyPrivatelyField () {
+      return this.requestCanReplyPrivatelyField(true);
+    }
+    public APIRequestGetSharedPosts requestCanReplyPrivatelyField (boolean value) {
+      this.requestField("can_reply_privately", value);
       return this;
     }
     public APIRequestGetSharedPosts requestCaptionField () {

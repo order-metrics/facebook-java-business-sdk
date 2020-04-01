@@ -61,8 +61,6 @@ public class OpenGraphObject extends APINode {
   private Object mApplication = null;
   @SerializedName("audio")
   private List<Object> mAudio = null;
-  @SerializedName("context")
-  private OpenGraphContext mContext = null;
   @SerializedName("created_time")
   private String mCreatedTime = null;
   @SerializedName("description")
@@ -179,7 +177,7 @@ public class OpenGraphObject extends APINode {
         context.log("[Warning] When parsing response, object is not consistent with JSON:");
         context.log("[JSON]" + o1);
         context.log("[Object]" + o2);
-      };
+      }
     }
     openGraphObject.context = context;
     openGraphObject.rawValue = json;
@@ -308,8 +306,12 @@ public class OpenGraphObject extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGetPicture getPicture() {
-    return new APIRequestGetPicture(this.getPrefixedId().toString(), context);
+  public APIRequestGetComments getComments() {
+    return new APIRequestGetComments(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestGetReactions getReactions() {
+    return new APIRequestGetReactions(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGet get() {
@@ -327,13 +329,6 @@ public class OpenGraphObject extends APINode {
 
   public List<Object> getFieldAudio() {
     return mAudio;
-  }
-
-  public OpenGraphContext getFieldContext() {
-    if (mContext != null) {
-      mContext.context = getContext();
-    }
-    return mContext;
   }
 
   public String getFieldCreatedTime() {
@@ -410,58 +405,74 @@ public class OpenGraphObject extends APINode {
 
 
 
-  public static class APIRequestGetPicture extends APIRequest<ProfilePictureSource> {
+  public static class APIRequestGetComments extends APIRequest<Comment> {
 
-    APINodeList<ProfilePictureSource> lastResponse = null;
+    APINodeList<Comment> lastResponse = null;
     @Override
-    public APINodeList<ProfilePictureSource> getLastResponse() {
+    public APINodeList<Comment> getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "redirect",
-      "type",
+      "filter",
+      "live_filter",
+      "order",
+      "since",
     };
 
     public static final String[] FIELDS = {
-      "bottom",
-      "cache_key",
-      "height",
-      "is_silhouette",
-      "left",
-      "right",
-      "top",
-      "url",
-      "width",
+      "admin_creator",
+      "application",
+      "attachment",
+      "can_comment",
+      "can_hide",
+      "can_like",
+      "can_remove",
+      "can_reply_privately",
+      "comment_count",
+      "created_time",
+      "from",
+      "id",
+      "is_hidden",
+      "is_private",
+      "like_count",
+      "live_broadcast_timestamp",
+      "message",
+      "message_tags",
+      "object",
+      "parent",
+      "permalink_url",
+      "private_reply_conversation",
+      "user_likes",
     };
 
     @Override
-    public APINodeList<ProfilePictureSource> parseResponse(String response, String header) throws APIException {
-      return ProfilePictureSource.parseResponse(response, getContext(), this, header);
+    public APINodeList<Comment> parseResponse(String response, String header) throws APIException {
+      return Comment.parseResponse(response, getContext(), this, header);
     }
 
     @Override
-    public APINodeList<ProfilePictureSource> execute() throws APIException {
+    public APINodeList<Comment> execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public APINodeList<ProfilePictureSource> execute(Map<String, Object> extraParams) throws APIException {
+    public APINodeList<Comment> execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<APINodeList<ProfilePictureSource>> executeAsync() throws APIException {
+    public ListenableFuture<APINodeList<Comment>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<APINodeList<ProfilePictureSource>> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<APINodeList<Comment>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<ProfilePictureSource>>() {
-           public APINodeList<ProfilePictureSource> apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, APINodeList<Comment>>() {
+           public APINodeList<Comment> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetPicture.this.parseResponse(result.getBody(), result.getHeader());
+               return APIRequestGetComments.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -470,46 +481,60 @@ public class OpenGraphObject extends APINode {
       );
     };
 
-    public APIRequestGetPicture(String nodeId, APIContext context) {
-      super(context, nodeId, "/picture", "GET", Arrays.asList(PARAMS));
+    public APIRequestGetComments(String nodeId, APIContext context) {
+      super(context, nodeId, "/comments", "GET", Arrays.asList(PARAMS));
     }
 
     @Override
-    public APIRequestGetPicture setParam(String param, Object value) {
+    public APIRequestGetComments setParam(String param, Object value) {
       setParamInternal(param, value);
       return this;
     }
 
     @Override
-    public APIRequestGetPicture setParams(Map<String, Object> params) {
+    public APIRequestGetComments setParams(Map<String, Object> params) {
       setParamsInternal(params);
       return this;
     }
 
 
-    public APIRequestGetPicture setRedirect (Boolean redirect) {
-      this.setParam("redirect", redirect);
+    public APIRequestGetComments setFilter (Comment.EnumFilter filter) {
+      this.setParam("filter", filter);
       return this;
     }
-    public APIRequestGetPicture setRedirect (String redirect) {
-      this.setParam("redirect", redirect);
-      return this;
-    }
-
-    public APIRequestGetPicture setType (ProfilePictureSource.EnumType type) {
-      this.setParam("type", type);
-      return this;
-    }
-    public APIRequestGetPicture setType (String type) {
-      this.setParam("type", type);
+    public APIRequestGetComments setFilter (String filter) {
+      this.setParam("filter", filter);
       return this;
     }
 
-    public APIRequestGetPicture requestAllFields () {
+    public APIRequestGetComments setLiveFilter (Comment.EnumLiveFilter liveFilter) {
+      this.setParam("live_filter", liveFilter);
+      return this;
+    }
+    public APIRequestGetComments setLiveFilter (String liveFilter) {
+      this.setParam("live_filter", liveFilter);
+      return this;
+    }
+
+    public APIRequestGetComments setOrder (Comment.EnumOrder order) {
+      this.setParam("order", order);
+      return this;
+    }
+    public APIRequestGetComments setOrder (String order) {
+      this.setParam("order", order);
+      return this;
+    }
+
+    public APIRequestGetComments setSince (String since) {
+      this.setParam("since", since);
+      return this;
+    }
+
+    public APIRequestGetComments requestAllFields () {
       return this.requestAllFields(true);
     }
 
-    public APIRequestGetPicture requestAllFields (boolean value) {
+    public APIRequestGetComments requestAllFields (boolean value) {
       for (String field : FIELDS) {
         this.requestField(field, value);
       }
@@ -517,12 +542,12 @@ public class OpenGraphObject extends APINode {
     }
 
     @Override
-    public APIRequestGetPicture requestFields (List<String> fields) {
+    public APIRequestGetComments requestFields (List<String> fields) {
       return this.requestFields(fields, true);
     }
 
     @Override
-    public APIRequestGetPicture requestFields (List<String> fields, boolean value) {
+    public APIRequestGetComments requestFields (List<String> fields, boolean value) {
       for (String field : fields) {
         this.requestField(field, value);
       }
@@ -530,78 +555,378 @@ public class OpenGraphObject extends APINode {
     }
 
     @Override
-    public APIRequestGetPicture requestField (String field) {
+    public APIRequestGetComments requestField (String field) {
       this.requestField(field, true);
       return this;
     }
 
     @Override
-    public APIRequestGetPicture requestField (String field, boolean value) {
+    public APIRequestGetComments requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
 
-    public APIRequestGetPicture requestBottomField () {
-      return this.requestBottomField(true);
+    public APIRequestGetComments requestAdminCreatorField () {
+      return this.requestAdminCreatorField(true);
     }
-    public APIRequestGetPicture requestBottomField (boolean value) {
-      this.requestField("bottom", value);
+    public APIRequestGetComments requestAdminCreatorField (boolean value) {
+      this.requestField("admin_creator", value);
       return this;
     }
-    public APIRequestGetPicture requestCacheKeyField () {
-      return this.requestCacheKeyField(true);
+    public APIRequestGetComments requestApplicationField () {
+      return this.requestApplicationField(true);
     }
-    public APIRequestGetPicture requestCacheKeyField (boolean value) {
-      this.requestField("cache_key", value);
+    public APIRequestGetComments requestApplicationField (boolean value) {
+      this.requestField("application", value);
       return this;
     }
-    public APIRequestGetPicture requestHeightField () {
-      return this.requestHeightField(true);
+    public APIRequestGetComments requestAttachmentField () {
+      return this.requestAttachmentField(true);
     }
-    public APIRequestGetPicture requestHeightField (boolean value) {
-      this.requestField("height", value);
+    public APIRequestGetComments requestAttachmentField (boolean value) {
+      this.requestField("attachment", value);
       return this;
     }
-    public APIRequestGetPicture requestIsSilhouetteField () {
-      return this.requestIsSilhouetteField(true);
+    public APIRequestGetComments requestCanCommentField () {
+      return this.requestCanCommentField(true);
     }
-    public APIRequestGetPicture requestIsSilhouetteField (boolean value) {
-      this.requestField("is_silhouette", value);
+    public APIRequestGetComments requestCanCommentField (boolean value) {
+      this.requestField("can_comment", value);
       return this;
     }
-    public APIRequestGetPicture requestLeftField () {
-      return this.requestLeftField(true);
+    public APIRequestGetComments requestCanHideField () {
+      return this.requestCanHideField(true);
     }
-    public APIRequestGetPicture requestLeftField (boolean value) {
-      this.requestField("left", value);
+    public APIRequestGetComments requestCanHideField (boolean value) {
+      this.requestField("can_hide", value);
       return this;
     }
-    public APIRequestGetPicture requestRightField () {
-      return this.requestRightField(true);
+    public APIRequestGetComments requestCanLikeField () {
+      return this.requestCanLikeField(true);
     }
-    public APIRequestGetPicture requestRightField (boolean value) {
-      this.requestField("right", value);
+    public APIRequestGetComments requestCanLikeField (boolean value) {
+      this.requestField("can_like", value);
       return this;
     }
-    public APIRequestGetPicture requestTopField () {
-      return this.requestTopField(true);
+    public APIRequestGetComments requestCanRemoveField () {
+      return this.requestCanRemoveField(true);
     }
-    public APIRequestGetPicture requestTopField (boolean value) {
-      this.requestField("top", value);
+    public APIRequestGetComments requestCanRemoveField (boolean value) {
+      this.requestField("can_remove", value);
       return this;
     }
-    public APIRequestGetPicture requestUrlField () {
-      return this.requestUrlField(true);
+    public APIRequestGetComments requestCanReplyPrivatelyField () {
+      return this.requestCanReplyPrivatelyField(true);
     }
-    public APIRequestGetPicture requestUrlField (boolean value) {
-      this.requestField("url", value);
+    public APIRequestGetComments requestCanReplyPrivatelyField (boolean value) {
+      this.requestField("can_reply_privately", value);
       return this;
     }
-    public APIRequestGetPicture requestWidthField () {
-      return this.requestWidthField(true);
+    public APIRequestGetComments requestCommentCountField () {
+      return this.requestCommentCountField(true);
     }
-    public APIRequestGetPicture requestWidthField (boolean value) {
-      this.requestField("width", value);
+    public APIRequestGetComments requestCommentCountField (boolean value) {
+      this.requestField("comment_count", value);
+      return this;
+    }
+    public APIRequestGetComments requestCreatedTimeField () {
+      return this.requestCreatedTimeField(true);
+    }
+    public APIRequestGetComments requestCreatedTimeField (boolean value) {
+      this.requestField("created_time", value);
+      return this;
+    }
+    public APIRequestGetComments requestFromField () {
+      return this.requestFromField(true);
+    }
+    public APIRequestGetComments requestFromField (boolean value) {
+      this.requestField("from", value);
+      return this;
+    }
+    public APIRequestGetComments requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetComments requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetComments requestIsHiddenField () {
+      return this.requestIsHiddenField(true);
+    }
+    public APIRequestGetComments requestIsHiddenField (boolean value) {
+      this.requestField("is_hidden", value);
+      return this;
+    }
+    public APIRequestGetComments requestIsPrivateField () {
+      return this.requestIsPrivateField(true);
+    }
+    public APIRequestGetComments requestIsPrivateField (boolean value) {
+      this.requestField("is_private", value);
+      return this;
+    }
+    public APIRequestGetComments requestLikeCountField () {
+      return this.requestLikeCountField(true);
+    }
+    public APIRequestGetComments requestLikeCountField (boolean value) {
+      this.requestField("like_count", value);
+      return this;
+    }
+    public APIRequestGetComments requestLiveBroadcastTimestampField () {
+      return this.requestLiveBroadcastTimestampField(true);
+    }
+    public APIRequestGetComments requestLiveBroadcastTimestampField (boolean value) {
+      this.requestField("live_broadcast_timestamp", value);
+      return this;
+    }
+    public APIRequestGetComments requestMessageField () {
+      return this.requestMessageField(true);
+    }
+    public APIRequestGetComments requestMessageField (boolean value) {
+      this.requestField("message", value);
+      return this;
+    }
+    public APIRequestGetComments requestMessageTagsField () {
+      return this.requestMessageTagsField(true);
+    }
+    public APIRequestGetComments requestMessageTagsField (boolean value) {
+      this.requestField("message_tags", value);
+      return this;
+    }
+    public APIRequestGetComments requestObjectField () {
+      return this.requestObjectField(true);
+    }
+    public APIRequestGetComments requestObjectField (boolean value) {
+      this.requestField("object", value);
+      return this;
+    }
+    public APIRequestGetComments requestParentField () {
+      return this.requestParentField(true);
+    }
+    public APIRequestGetComments requestParentField (boolean value) {
+      this.requestField("parent", value);
+      return this;
+    }
+    public APIRequestGetComments requestPermalinkUrlField () {
+      return this.requestPermalinkUrlField(true);
+    }
+    public APIRequestGetComments requestPermalinkUrlField (boolean value) {
+      this.requestField("permalink_url", value);
+      return this;
+    }
+    public APIRequestGetComments requestPrivateReplyConversationField () {
+      return this.requestPrivateReplyConversationField(true);
+    }
+    public APIRequestGetComments requestPrivateReplyConversationField (boolean value) {
+      this.requestField("private_reply_conversation", value);
+      return this;
+    }
+    public APIRequestGetComments requestUserLikesField () {
+      return this.requestUserLikesField(true);
+    }
+    public APIRequestGetComments requestUserLikesField (boolean value) {
+      this.requestField("user_likes", value);
+      return this;
+    }
+  }
+
+  public static class APIRequestGetReactions extends APIRequest<Profile> {
+
+    APINodeList<Profile> lastResponse = null;
+    @Override
+    public APINodeList<Profile> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "type",
+    };
+
+    public static final String[] FIELDS = {
+      "can_post",
+      "id",
+      "link",
+      "name",
+      "pic",
+      "pic_crop",
+      "pic_large",
+      "pic_small",
+      "pic_square",
+      "profile_type",
+      "username",
+    };
+
+    @Override
+    public APINodeList<Profile> parseResponse(String response, String header) throws APIException {
+      return Profile.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<Profile> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<Profile> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<Profile>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<Profile>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<Profile>>() {
+           public APINodeList<Profile> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetReactions.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetReactions(String nodeId, APIContext context) {
+      super(context, nodeId, "/reactions", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetReactions setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetReactions setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetReactions setType (Profile.EnumType type) {
+      this.setParam("type", type);
+      return this;
+    }
+    public APIRequestGetReactions setType (String type) {
+      this.setParam("type", type);
+      return this;
+    }
+
+    public APIRequestGetReactions requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetReactions requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetReactions requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetReactions requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetReactions requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetReactions requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetReactions requestCanPostField () {
+      return this.requestCanPostField(true);
+    }
+    public APIRequestGetReactions requestCanPostField (boolean value) {
+      this.requestField("can_post", value);
+      return this;
+    }
+    public APIRequestGetReactions requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetReactions requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetReactions requestLinkField () {
+      return this.requestLinkField(true);
+    }
+    public APIRequestGetReactions requestLinkField (boolean value) {
+      this.requestField("link", value);
+      return this;
+    }
+    public APIRequestGetReactions requestNameField () {
+      return this.requestNameField(true);
+    }
+    public APIRequestGetReactions requestNameField (boolean value) {
+      this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGetReactions requestPicField () {
+      return this.requestPicField(true);
+    }
+    public APIRequestGetReactions requestPicField (boolean value) {
+      this.requestField("pic", value);
+      return this;
+    }
+    public APIRequestGetReactions requestPicCropField () {
+      return this.requestPicCropField(true);
+    }
+    public APIRequestGetReactions requestPicCropField (boolean value) {
+      this.requestField("pic_crop", value);
+      return this;
+    }
+    public APIRequestGetReactions requestPicLargeField () {
+      return this.requestPicLargeField(true);
+    }
+    public APIRequestGetReactions requestPicLargeField (boolean value) {
+      this.requestField("pic_large", value);
+      return this;
+    }
+    public APIRequestGetReactions requestPicSmallField () {
+      return this.requestPicSmallField(true);
+    }
+    public APIRequestGetReactions requestPicSmallField (boolean value) {
+      this.requestField("pic_small", value);
+      return this;
+    }
+    public APIRequestGetReactions requestPicSquareField () {
+      return this.requestPicSquareField(true);
+    }
+    public APIRequestGetReactions requestPicSquareField (boolean value) {
+      this.requestField("pic_square", value);
+      return this;
+    }
+    public APIRequestGetReactions requestProfileTypeField () {
+      return this.requestProfileTypeField(true);
+    }
+    public APIRequestGetReactions requestProfileTypeField (boolean value) {
+      this.requestField("profile_type", value);
+      return this;
+    }
+    public APIRequestGetReactions requestUsernameField () {
+      return this.requestUsernameField(true);
+    }
+    public APIRequestGetReactions requestUsernameField (boolean value) {
+      this.requestField("username", value);
       return this;
     }
   }
@@ -620,7 +945,6 @@ public class OpenGraphObject extends APINode {
       "admins",
       "application",
       "audio",
-      "context",
       "created_time",
       "description",
       "determiner",
@@ -749,13 +1073,6 @@ public class OpenGraphObject extends APINode {
     }
     public APIRequestGet requestAudioField (boolean value) {
       this.requestField("audio", value);
-      return this;
-    }
-    public APIRequestGet requestContextField () {
-      return this.requestContextField(true);
-    }
-    public APIRequestGet requestContextField (boolean value) {
-      this.requestField("context", value);
       return this;
     }
     public APIRequestGet requestCreatedTimeField () {
@@ -904,7 +1221,6 @@ public class OpenGraphObject extends APINode {
     this.mAdmins = instance.mAdmins;
     this.mApplication = instance.mApplication;
     this.mAudio = instance.mAudio;
-    this.mContext = instance.mContext;
     this.mCreatedTime = instance.mCreatedTime;
     this.mDescription = instance.mDescription;
     this.mDeterminer = instance.mDeterminer;

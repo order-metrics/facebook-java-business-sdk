@@ -80,7 +80,7 @@ public class AdAccountDefaultObjective extends APINode {
         context.log("[Warning] When parsing response, object is not consistent with JSON:");
         context.log("[JSON]" + o1);
         context.log("[Object]" + o2);
-      };
+      }
     }
     adAccountDefaultObjective.context = context;
     adAccountDefaultObjective.rawValue = json;
@@ -267,7 +267,7 @@ public class AdAccountDefaultObjective extends APINode {
       VALUE_VIDEO_VIEWS("VIDEO_VIEWS"),
       @SerializedName("WEBSITE_CONVERSIONS")
       VALUE_WEBSITE_CONVERSIONS("WEBSITE_CONVERSIONS"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -318,7 +318,7 @@ public class AdAccountDefaultObjective extends APINode {
       VALUE_VIDEO_VIEWS("VIDEO_VIEWS"),
       @SerializedName("WEBSITE_CONVERSIONS")
       VALUE_WEBSITE_CONVERSIONS("WEBSITE_CONVERSIONS"),
-      NULL(null);
+      ;
 
       private String value;
 

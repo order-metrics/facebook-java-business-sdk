@@ -84,7 +84,7 @@ public class AsyncRequest extends APINode {
         context.log("[Warning] When parsing response, object is not consistent with JSON:");
         context.log("[JSON]" + o1);
         context.log("[Object]" + o2);
-      };
+      }
     }
     asyncRequest.context = context;
     asyncRequest.rawValue = json;
@@ -261,7 +261,7 @@ public class AsyncRequest extends APINode {
       VALUE_FINISHED("FINISHED"),
       @SerializedName("INITIALIZED")
       VALUE_INITIALIZED("INITIALIZED"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -282,7 +282,7 @@ public class AsyncRequest extends APINode {
       VALUE_BATCH_API("BATCH_API"),
       @SerializedName("DRAFTS")
       VALUE_DRAFTS("DRAFTS"),
-      NULL(null);
+      ;
 
       private String value;
 

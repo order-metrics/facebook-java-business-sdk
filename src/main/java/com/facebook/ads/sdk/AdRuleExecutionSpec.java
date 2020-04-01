@@ -80,7 +80,7 @@ public class AdRuleExecutionSpec extends APINode {
         context.log("[Warning] When parsing response, object is not consistent with JSON:");
         context.log("[JSON]" + o1);
         context.log("[Object]" + o2);
-      };
+      }
     }
     adRuleExecutionSpec.context = context;
     adRuleExecutionSpec.rawValue = json;
@@ -240,6 +240,8 @@ public class AdRuleExecutionSpec extends APINode {
       VALUE_CHANGE_BID("CHANGE_BID"),
       @SerializedName("CHANGE_BUDGET")
       VALUE_CHANGE_BUDGET("CHANGE_BUDGET"),
+      @SerializedName("CHANGE_CAMPAIGN_BUDGET")
+      VALUE_CHANGE_CAMPAIGN_BUDGET("CHANGE_CAMPAIGN_BUDGET"),
       @SerializedName("NOTIFICATION")
       VALUE_NOTIFICATION("NOTIFICATION"),
       @SerializedName("PAUSE")
@@ -252,7 +254,7 @@ public class AdRuleExecutionSpec extends APINode {
       VALUE_ROTATE("ROTATE"),
       @SerializedName("UNPAUSE")
       VALUE_UNPAUSE("UNPAUSE"),
-      NULL(null);
+      ;
 
       private String value;
 

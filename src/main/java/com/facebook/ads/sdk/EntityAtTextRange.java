@@ -88,7 +88,7 @@ public class EntityAtTextRange extends APINode {
         context.log("[Warning] When parsing response, object is not consistent with JSON:");
         context.log("[JSON]" + o1);
         context.log("[Object]" + o2);
-      };
+      }
     }
     entityAtTextRange.context = context;
     entityAtTextRange.rawValue = json;
@@ -293,7 +293,7 @@ public class EntityAtTextRange extends APINode {
       VALUE_PAGE("page"),
       @SerializedName("user")
       VALUE_USER("user"),
-      NULL(null);
+      ;
 
       private String value;
 

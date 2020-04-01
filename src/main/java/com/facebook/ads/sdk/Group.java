@@ -173,7 +173,7 @@ public class Group extends APINode {
         context.log("[Warning] When parsing response, object is not consistent with JSON:");
         context.log("[JSON]" + o1);
         context.log("[Object]" + o2);
-      };
+      }
     }
     group.context = context;
     group.rawValue = json;
@@ -3134,6 +3134,7 @@ public class Group extends APINode {
       "is_reference_only",
       "live_encoders",
       "live_views",
+      "overlay_url",
       "permalink_url",
       "planned_start_time",
       "seconds_left",
@@ -3365,6 +3366,13 @@ public class Group extends APINode {
       this.requestField("live_views", value);
       return this;
     }
+    public APIRequestGetLiveVideos requestOverlayUrlField () {
+      return this.requestOverlayUrlField(true);
+    }
+    public APIRequestGetLiveVideos requestOverlayUrlField (boolean value) {
+      this.requestField("overlay_url", value);
+      return this;
+    }
     public APIRequestGetLiveVideos requestPermalinkUrlField () {
       return this.requestPermalinkUrlField(true);
     }
@@ -3445,7 +3453,6 @@ public class Group extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "attribution_app_id",
       "content_tags",
       "description",
       "encoding_settings",
@@ -3524,11 +3531,6 @@ public class Group extends APINode {
       return this;
     }
 
-
-    public APIRequestCreateLiveVideo setAttributionAppId (String attributionAppId) {
-      this.setParam("attribution_app_id", attributionAppId);
-      return this;
-    }
 
     public APIRequestCreateLiveVideo setContentTags (List<String> contentTags) {
       this.setParam("content_tags", contentTags);
@@ -4088,7 +4090,7 @@ public class Group extends APINode {
     };
 
     public APIRequestCreateOpenGraphActionFeed(String nodeId, APIContext context) {
-      super(context, nodeId, "/opengraphactionfeed", "POST", Arrays.asList(PARAMS));
+      super(context, nodeId, "/open_graph_action_feed", "POST", Arrays.asList(PARAMS));
     }
 
     @Override
@@ -4364,6 +4366,7 @@ public class Group extends APINode {
       "address",
       "admin_notes",
       "age_range",
+      "auth_method",
       "birthday",
       "can_review_measurement_request",
       "cover",
@@ -4371,7 +4374,6 @@ public class Group extends APINode {
       "devices",
       "education",
       "email",
-      "employee_number",
       "favorite_athletes",
       "favorite_teams",
       "first_name",
@@ -4383,9 +4385,9 @@ public class Group extends APINode {
       "installed",
       "interested_in",
       "is_famedeeplinkinguser",
+      "is_guest_user",
       "is_shared_login",
       "is_verified",
-      "labels",
       "languages",
       "last_name",
       "link",
@@ -4409,6 +4411,7 @@ public class Group extends APINode {
       "short_name",
       "significant_other",
       "sports",
+      "supports_donate_button_in_live_video",
       "test_group",
       "third_party_id",
       "timezone",
@@ -4538,6 +4541,13 @@ public class Group extends APINode {
       this.requestField("age_range", value);
       return this;
     }
+    public APIRequestGetOptedInMembers requestAuthMethodField () {
+      return this.requestAuthMethodField(true);
+    }
+    public APIRequestGetOptedInMembers requestAuthMethodField (boolean value) {
+      this.requestField("auth_method", value);
+      return this;
+    }
     public APIRequestGetOptedInMembers requestBirthdayField () {
       return this.requestBirthdayField(true);
     }
@@ -4585,13 +4595,6 @@ public class Group extends APINode {
     }
     public APIRequestGetOptedInMembers requestEmailField (boolean value) {
       this.requestField("email", value);
-      return this;
-    }
-    public APIRequestGetOptedInMembers requestEmployeeNumberField () {
-      return this.requestEmployeeNumberField(true);
-    }
-    public APIRequestGetOptedInMembers requestEmployeeNumberField (boolean value) {
-      this.requestField("employee_number", value);
       return this;
     }
     public APIRequestGetOptedInMembers requestFavoriteAthletesField () {
@@ -4671,6 +4674,13 @@ public class Group extends APINode {
       this.requestField("is_famedeeplinkinguser", value);
       return this;
     }
+    public APIRequestGetOptedInMembers requestIsGuestUserField () {
+      return this.requestIsGuestUserField(true);
+    }
+    public APIRequestGetOptedInMembers requestIsGuestUserField (boolean value) {
+      this.requestField("is_guest_user", value);
+      return this;
+    }
     public APIRequestGetOptedInMembers requestIsSharedLoginField () {
       return this.requestIsSharedLoginField(true);
     }
@@ -4683,13 +4693,6 @@ public class Group extends APINode {
     }
     public APIRequestGetOptedInMembers requestIsVerifiedField (boolean value) {
       this.requestField("is_verified", value);
-      return this;
-    }
-    public APIRequestGetOptedInMembers requestLabelsField () {
-      return this.requestLabelsField(true);
-    }
-    public APIRequestGetOptedInMembers requestLabelsField (boolean value) {
-      this.requestField("labels", value);
       return this;
     }
     public APIRequestGetOptedInMembers requestLanguagesField () {
@@ -4853,6 +4856,13 @@ public class Group extends APINode {
       this.requestField("sports", value);
       return this;
     }
+    public APIRequestGetOptedInMembers requestSupportsDonateButtonInLiveVideoField () {
+      return this.requestSupportsDonateButtonInLiveVideoField(true);
+    }
+    public APIRequestGetOptedInMembers requestSupportsDonateButtonInLiveVideoField (boolean value) {
+      this.requestField("supports_donate_button_in_live_video", value);
+      return this;
+    }
     public APIRequestGetOptedInMembers requestTestGroupField () {
       return this.requestTestGroupField(true);
     }
@@ -4954,6 +4964,7 @@ public class Group extends APINode {
       "ios_bundle_id",
       "is_explicit_location",
       "is_explicit_place",
+      "is_visual_search",
       "manual_privacy",
       "message",
       "name",
@@ -5196,6 +5207,15 @@ public class Group extends APINode {
     }
     public APIRequestCreatePhoto setIsExplicitPlace (String isExplicitPlace) {
       this.setParam("is_explicit_place", isExplicitPlace);
+      return this;
+    }
+
+    public APIRequestCreatePhoto setIsVisualSearch (Boolean isVisualSearch) {
+      this.setParam("is_visual_search", isVisualSearch);
+      return this;
+    }
+    public APIRequestCreatePhoto setIsVisualSearch (String isVisualSearch) {
+      this.setParam("is_visual_search", isVisualSearch);
       return this;
     }
 
@@ -5688,6 +5708,8 @@ public class Group extends APINode {
       "backdated_time_granularity",
       "content_category",
       "content_tags",
+      "copyright",
+      "copyright_monitoring_status",
       "created_time",
       "custom_labels",
       "description",
@@ -5703,9 +5725,11 @@ public class Group extends APINode {
       "is_crossposting_eligible",
       "is_episode",
       "is_instagram_eligible",
+      "is_reference_only",
       "length",
       "live_audience_count",
       "live_status",
+      "music_video_copyright",
       "permalink_url",
       "picture",
       "place",
@@ -5717,7 +5741,6 @@ public class Group extends APINode {
       "spherical",
       "status",
       "title",
-      "tv_banner_ad",
       "universal_video_id",
       "updated_time",
     };
@@ -5855,6 +5878,20 @@ public class Group extends APINode {
       this.requestField("content_tags", value);
       return this;
     }
+    public APIRequestGetVideos requestCopyrightField () {
+      return this.requestCopyrightField(true);
+    }
+    public APIRequestGetVideos requestCopyrightField (boolean value) {
+      this.requestField("copyright", value);
+      return this;
+    }
+    public APIRequestGetVideos requestCopyrightMonitoringStatusField () {
+      return this.requestCopyrightMonitoringStatusField(true);
+    }
+    public APIRequestGetVideos requestCopyrightMonitoringStatusField (boolean value) {
+      this.requestField("copyright_monitoring_status", value);
+      return this;
+    }
     public APIRequestGetVideos requestCreatedTimeField () {
       return this.requestCreatedTimeField(true);
     }
@@ -5960,6 +5997,13 @@ public class Group extends APINode {
       this.requestField("is_instagram_eligible", value);
       return this;
     }
+    public APIRequestGetVideos requestIsReferenceOnlyField () {
+      return this.requestIsReferenceOnlyField(true);
+    }
+    public APIRequestGetVideos requestIsReferenceOnlyField (boolean value) {
+      this.requestField("is_reference_only", value);
+      return this;
+    }
     public APIRequestGetVideos requestLengthField () {
       return this.requestLengthField(true);
     }
@@ -5979,6 +6023,13 @@ public class Group extends APINode {
     }
     public APIRequestGetVideos requestLiveStatusField (boolean value) {
       this.requestField("live_status", value);
+      return this;
+    }
+    public APIRequestGetVideos requestMusicVideoCopyrightField () {
+      return this.requestMusicVideoCopyrightField(true);
+    }
+    public APIRequestGetVideos requestMusicVideoCopyrightField (boolean value) {
+      this.requestField("music_video_copyright", value);
       return this;
     }
     public APIRequestGetVideos requestPermalinkUrlField () {
@@ -6056,13 +6107,6 @@ public class Group extends APINode {
     }
     public APIRequestGetVideos requestTitleField (boolean value) {
       this.requestField("title", value);
-      return this;
-    }
-    public APIRequestGetVideos requestTvBannerAdField () {
-      return this.requestTvBannerAdField(true);
-    }
-    public APIRequestGetVideos requestTvBannerAdField (boolean value) {
-      this.requestField("tv_banner_ad", value);
       return this;
     }
     public APIRequestGetVideos requestUniversalVideoIdField () {
@@ -7286,7 +7330,7 @@ public class Group extends APINode {
       VALUE_ANYONE("ANYONE"),
       @SerializedName("NONE")
       VALUE_NONE("NONE"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -7301,13 +7345,13 @@ public class Group extends APINode {
   }
 
   public static enum EnumPostPermissions {
-      @SerializedName("ADMIN_ONLY")
-      VALUE_ADMIN_ONLY("ADMIN_ONLY"),
-      @SerializedName("ANYONE")
-      VALUE_ANYONE("ANYONE"),
-      @SerializedName("NONE")
-      VALUE_NONE("NONE"),
-      NULL(null);
+      @SerializedName("0")
+      VALUE_0("0"),
+      @SerializedName("1")
+      VALUE_1("1"),
+      @SerializedName("2")
+      VALUE_2("2"),
+      ;
 
       private String value;
 
@@ -7334,6 +7378,8 @@ public class Group extends APINode {
       VALUE_COWORKERS("COWORKERS"),
       @SerializedName("CUSTOM")
       VALUE_CUSTOM("CUSTOM"),
+      @SerializedName("DEALS")
+      VALUE_DEALS("DEALS"),
       @SerializedName("EPHEMERAL")
       VALUE_EPHEMERAL("EPHEMERAL"),
       @SerializedName("EVENT_PLANNING")
@@ -7358,14 +7404,16 @@ public class Group extends APINode {
       VALUE_JOBS("JOBS"),
       @SerializedName("LEARNING")
       VALUE_LEARNING("LEARNING"),
-      @SerializedName("MEME")
-      VALUE_MEME("MEME"),
       @SerializedName("MENTORSHIP")
       VALUE_MENTORSHIP("MENTORSHIP"),
       @SerializedName("NEIGHBORS")
       VALUE_NEIGHBORS("NEIGHBORS"),
       @SerializedName("NONE")
       VALUE_NONE("NONE"),
+      @SerializedName("OCULUS")
+      VALUE_OCULUS("OCULUS"),
+      @SerializedName("PARENTING")
+      VALUE_PARENTING("PARENTING"),
       @SerializedName("PARENTS")
       VALUE_PARENTS("PARENTS"),
       @SerializedName("PROJECT")
@@ -7378,6 +7426,8 @@ public class Group extends APINode {
       VALUE_SCHOOL_CLASS("SCHOOL_CLASS"),
       @SerializedName("SORORITY")
       VALUE_SORORITY("SORORITY"),
+      @SerializedName("SPORTS")
+      VALUE_SPORTS("SPORTS"),
       @SerializedName("STUDY_GROUP")
       VALUE_STUDY_GROUP("STUDY_GROUP"),
       @SerializedName("SUPPORT")
@@ -7412,7 +7462,7 @@ public class Group extends APINode {
       VALUE_WORK_TEAM("WORK_TEAM"),
       @SerializedName("WORK_TEAMWORK")
       VALUE_WORK_TEAMWORK("WORK_TEAMWORK"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -7439,6 +7489,8 @@ public class Group extends APINode {
       VALUE_COWORKERS("COWORKERS"),
       @SerializedName("CUSTOM")
       VALUE_CUSTOM("CUSTOM"),
+      @SerializedName("DEALS")
+      VALUE_DEALS("DEALS"),
       @SerializedName("EPHEMERAL")
       VALUE_EPHEMERAL("EPHEMERAL"),
       @SerializedName("EVENT_PLANNING")
@@ -7463,14 +7515,16 @@ public class Group extends APINode {
       VALUE_JOBS("JOBS"),
       @SerializedName("LEARNING")
       VALUE_LEARNING("LEARNING"),
-      @SerializedName("MEME")
-      VALUE_MEME("MEME"),
       @SerializedName("MENTORSHIP")
       VALUE_MENTORSHIP("MENTORSHIP"),
       @SerializedName("NEIGHBORS")
       VALUE_NEIGHBORS("NEIGHBORS"),
       @SerializedName("NONE")
       VALUE_NONE("NONE"),
+      @SerializedName("OCULUS")
+      VALUE_OCULUS("OCULUS"),
+      @SerializedName("PARENTING")
+      VALUE_PARENTING("PARENTING"),
       @SerializedName("PARENTS")
       VALUE_PARENTS("PARENTS"),
       @SerializedName("PROJECT")
@@ -7483,6 +7537,8 @@ public class Group extends APINode {
       VALUE_SCHOOL_CLASS("SCHOOL_CLASS"),
       @SerializedName("SORORITY")
       VALUE_SORORITY("SORORITY"),
+      @SerializedName("SPORTS")
+      VALUE_SPORTS("SPORTS"),
       @SerializedName("STUDY_GROUP")
       VALUE_STUDY_GROUP("STUDY_GROUP"),
       @SerializedName("SUPPORT")
@@ -7517,7 +7573,7 @@ public class Group extends APINode {
       VALUE_WORK_TEAM("WORK_TEAM"),
       @SerializedName("WORK_TEAMWORK")
       VALUE_WORK_TEAMWORK("WORK_TEAMWORK"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -7532,36 +7588,10 @@ public class Group extends APINode {
   }
 
   public static enum EnumSuggestionCategory {
-      @SerializedName("CLOSE_FRIENDS")
-      VALUE_CLOSE_FRIENDS("CLOSE_FRIENDS"),
-      @SerializedName("CLOSE_FRIENDS_GENERIC")
-      VALUE_CLOSE_FRIENDS_GENERIC("CLOSE_FRIENDS_GENERIC"),
-      @SerializedName("CURRENT_CITY")
-      VALUE_CURRENT_CITY("CURRENT_CITY"),
       @SerializedName("EVENT")
       VALUE_EVENT("EVENT"),
-      @SerializedName("FAMILY")
-      VALUE_FAMILY("FAMILY"),
-      @SerializedName("FRIEND_LIST")
-      VALUE_FRIEND_LIST("FRIEND_LIST"),
-      @SerializedName("GAMES")
-      VALUE_GAMES("GAMES"),
-      @SerializedName("LIFE_EVENT")
-      VALUE_LIFE_EVENT("LIFE_EVENT"),
       @SerializedName("MESSENGER")
       VALUE_MESSENGER("MESSENGER"),
-      @SerializedName("MESSENGER_THREAD")
-      VALUE_MESSENGER_THREAD("MESSENGER_THREAD"),
-      @SerializedName("NEARBY_FRIENDS")
-      VALUE_NEARBY_FRIENDS("NEARBY_FRIENDS"),
-      @SerializedName("PAGE_ADMIN")
-      VALUE_PAGE_ADMIN("PAGE_ADMIN"),
-      @SerializedName("SCHOOL")
-      VALUE_SCHOOL("SCHOOL"),
-      @SerializedName("SCHOOL_GENERIC")
-      VALUE_SCHOOL_GENERIC("SCHOOL_GENERIC"),
-      @SerializedName("TOP_PAGE")
-      VALUE_TOP_PAGE("TOP_PAGE"),
       @SerializedName("WORK")
       VALUE_WORK("WORK"),
       @SerializedName("WORKPLACE")
@@ -7570,9 +7600,7 @@ public class Group extends APINode {
       VALUE_WORKPLACE_1_1("WORKPLACE_1_1"),
       @SerializedName("WORKPLACE_MANAGER")
       VALUE_WORKPLACE_MANAGER("WORKPLACE_MANAGER"),
-      @SerializedName("WORK_GENERIC")
-      VALUE_WORK_GENERIC("WORK_GENERIC"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -7599,7 +7627,7 @@ public class Group extends APINode {
       VALUE_NONE("none"),
       @SerializedName("year")
       VALUE_YEAR("year"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -7622,7 +7650,7 @@ public class Group extends APINode {
       VALUE_BRANDING_PHOTO("BRANDING_PHOTO"),
       @SerializedName("BRANDING_STATUS")
       VALUE_BRANDING_STATUS("BRANDING_STATUS"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -7641,7 +7669,7 @@ public class Group extends APINode {
       VALUE_MARKDOWN("MARKDOWN"),
       @SerializedName("PLAINTEXT")
       VALUE_PLAINTEXT("PLAINTEXT"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -7660,7 +7688,7 @@ public class Group extends APINode {
       VALUE_1("1"),
       @SerializedName("2")
       VALUE_2("2"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -7685,7 +7713,7 @@ public class Group extends APINode {
       VALUE_4("4"),
       @SerializedName("5")
       VALUE_5("5"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -7704,7 +7732,7 @@ public class Group extends APINode {
       VALUE_DISABLED("disabled"),
       @SerializedName("enabled")
       VALUE_ENABLED("enabled"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -7723,7 +7751,7 @@ public class Group extends APINode {
       VALUE_STORY("STORY"),
       @SerializedName("TIMELINE")
       VALUE_TIMELINE("TIMELINE"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -7746,9 +7774,13 @@ public class Group extends APINode {
       VALUE_INLINE_CREATED("INLINE_CREATED"),
       @SerializedName("PUBLISHED")
       VALUE_PUBLISHED("PUBLISHED"),
+      @SerializedName("REVIEWABLE_BRANDED_CONTENT")
+      VALUE_REVIEWABLE_BRANDED_CONTENT("REVIEWABLE_BRANDED_CONTENT"),
       @SerializedName("SCHEDULED")
       VALUE_SCHEDULED("SCHEDULED"),
-      NULL(null);
+      @SerializedName("SCHEDULED_RECURRING")
+      VALUE_SCHEDULED_RECURRING("SCHEDULED_RECURRING"),
+      ;
 
       private String value;
 
@@ -7771,7 +7803,7 @@ public class Group extends APINode {
       VALUE_50("50"),
       @SerializedName("68")
       VALUE_68("68"),
-      NULL(null);
+      ;
 
       private String value;
 

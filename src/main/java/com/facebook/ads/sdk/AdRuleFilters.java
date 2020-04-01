@@ -82,7 +82,7 @@ public class AdRuleFilters extends APINode {
         context.log("[Warning] When parsing response, object is not consistent with JSON:");
         context.log("[JSON]" + o1);
         context.log("[Object]" + o2);
-      };
+      }
     }
     adRuleFilters.context = context;
     adRuleFilters.rawValue = json;
@@ -268,7 +268,7 @@ public class AdRuleFilters extends APINode {
       VALUE_NOT_IN("NOT_IN"),
       @SerializedName("NOT_IN_RANGE")
       VALUE_NOT_IN_RANGE("NOT_IN_RANGE"),
-      NULL(null);
+      ;
 
       private String value;
 

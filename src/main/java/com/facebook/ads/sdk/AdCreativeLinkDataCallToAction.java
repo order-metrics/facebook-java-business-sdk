@@ -80,7 +80,7 @@ public class AdCreativeLinkDataCallToAction extends APINode {
         context.log("[Warning] When parsing response, object is not consistent with JSON:");
         context.log("[JSON]" + o1);
         context.log("[Object]" + o2);
-      };
+      }
     }
     adCreativeLinkDataCallToAction.context = context;
     adCreativeLinkDataCallToAction.rawValue = json;
@@ -342,7 +342,7 @@ public class AdCreativeLinkDataCallToAction extends APINode {
       VALUE_WHATSAPP_MESSAGE("WHATSAPP_MESSAGE"),
       @SerializedName("WOODHENGE_SUPPORT")
       VALUE_WOODHENGE_SUPPORT("WOODHENGE_SUPPORT"),
-      NULL(null);
+      ;
 
       private String value;
 

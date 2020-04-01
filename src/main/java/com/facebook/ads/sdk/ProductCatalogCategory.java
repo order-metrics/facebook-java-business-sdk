@@ -90,7 +90,7 @@ public class ProductCatalogCategory extends APINode {
         context.log("[Warning] When parsing response, object is not consistent with JSON:");
         context.log("[JSON]" + o1);
         context.log("[Object]" + o2);
-      };
+      }
     }
     productCatalogCategory.context = context;
     productCatalogCategory.rawValue = json;
@@ -292,7 +292,7 @@ public class ProductCatalogCategory extends APINode {
       VALUE_CATEGORY("CATEGORY"),
       @SerializedName("PRODUCT_TYPE")
       VALUE_PRODUCT_TYPE("PRODUCT_TYPE"),
-      NULL(null);
+      ;
 
       private String value;
 

@@ -84,7 +84,7 @@ public class InstantArticleInsightsQueryResult extends APINode {
         context.log("[Warning] When parsing response, object is not consistent with JSON:");
         context.log("[JSON]" + o1);
         context.log("[Object]" + o2);
-      };
+      }
     }
     instantArticleInsightsQueryResult.context = context;
     instantArticleInsightsQueryResult.rawValue = json;
@@ -271,7 +271,7 @@ public class InstantArticleInsightsQueryResult extends APINode {
       VALUE_PLATFORM("platform"),
       @SerializedName("region")
       VALUE_REGION("region"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -296,7 +296,7 @@ public class InstantArticleInsightsQueryResult extends APINode {
       VALUE_MONTH("month"),
       @SerializedName("week")
       VALUE_WEEK("week"),
-      NULL(null);
+      ;
 
       private String value;
 

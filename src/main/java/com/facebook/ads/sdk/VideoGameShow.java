@@ -145,7 +145,7 @@ public class VideoGameShow extends APINode {
         context.log("[Warning] When parsing response, object is not consistent with JSON:");
         context.log("[JSON]" + o1);
         context.log("[Object]" + o2);
-      };
+      }
     }
     videoGameShow.context = context;
     videoGameShow.rawValue = json;
@@ -274,14 +274,6 @@ public class VideoGameShow extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGetQuestions getQuestions() {
-    return new APIRequestGetQuestions(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestCreateQuestion createQuestion() {
-    return new APIRequestCreateQuestion(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGet get() {
     return new APIRequestGet(this.getPrefixedId().toString(), context);
   }
@@ -312,240 +304,6 @@ public class VideoGameShow extends APINode {
   }
 
 
-
-  public static class APIRequestGetQuestions extends APIRequest<APINode> {
-
-    APINodeList<APINode> lastResponse = null;
-    @Override
-    public APINodeList<APINode> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<APINode> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(ResponseWrapper result) {
-             try {
-               return APIRequestGetQuestions.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGetQuestions(String nodeId, APIContext context) {
-      super(context, nodeId, "/questions", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetQuestions setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetQuestions setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetQuestions requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetQuestions requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetQuestions requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetQuestions requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetQuestions requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetQuestions requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
-  public static class APIRequestCreateQuestion extends APIRequest<APINode> {
-
-    APINode lastResponse = null;
-    @Override
-    public APINode getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "correct_option",
-      "options",
-      "question",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINode parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public APINode execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINode execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINode> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINode>() {
-           public APINode apply(ResponseWrapper result) {
-             try {
-               return APIRequestCreateQuestion.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestCreateQuestion(String nodeId, APIContext context) {
-      super(context, nodeId, "/questions", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreateQuestion setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateQuestion setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreateQuestion setCorrectOption (Long correctOption) {
-      this.setParam("correct_option", correctOption);
-      return this;
-    }
-    public APIRequestCreateQuestion setCorrectOption (String correctOption) {
-      this.setParam("correct_option", correctOption);
-      return this;
-    }
-
-    public APIRequestCreateQuestion setOptions (List<String> options) {
-      this.setParam("options", options);
-      return this;
-    }
-    public APIRequestCreateQuestion setOptions (String options) {
-      this.setParam("options", options);
-      return this;
-    }
-
-    public APIRequestCreateQuestion setQuestion (String question) {
-      this.setParam("question", question);
-      return this;
-    }
-
-    public APIRequestCreateQuestion requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreateQuestion requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateQuestion requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreateQuestion requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateQuestion requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateQuestion requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
 
   public static class APIRequestGet extends APIRequest<VideoGameShow> {
 
@@ -810,7 +568,7 @@ public class VideoGameShow extends APINode {
       VALUE_END_GAME("END_GAME"),
       @SerializedName("START_GAME")
       VALUE_START_GAME("START_GAME"),
-      NULL(null);
+      ;
 
       private String value;
 

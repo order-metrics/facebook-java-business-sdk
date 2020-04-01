@@ -80,7 +80,7 @@ public class StreamingReaction extends APINode {
         context.log("[Warning] When parsing response, object is not consistent with JSON:");
         context.log("[JSON]" + o1);
         context.log("[Object]" + o2);
-      };
+      }
     }
     streamingReaction.context = context;
     streamingReaction.rawValue = json;
@@ -249,7 +249,7 @@ public class StreamingReaction extends APINode {
       VALUE_THANKFUL("THANKFUL"),
       @SerializedName("WOW")
       VALUE_WOW("WOW"),
-      NULL(null);
+      ;
 
       private String value;
 

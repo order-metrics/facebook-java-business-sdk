@@ -167,7 +167,7 @@ public class AdImage extends APINode {
         context.log("[Warning] When parsing response, object is not consistent with JSON:");
         context.log("[JSON]" + o1);
         context.log("[Object]" + o2);
-      };
+      }
     }
     adImage.context = context;
     adImage.rawValue = json;
@@ -604,7 +604,7 @@ public class AdImage extends APINode {
       VALUE_ACTIVE("ACTIVE"),
       @SerializedName("DELETED")
       VALUE_DELETED("DELETED"),
-      NULL(null);
+      ;
 
       private String value;
 

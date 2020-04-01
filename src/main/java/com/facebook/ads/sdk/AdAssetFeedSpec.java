@@ -69,6 +69,8 @@ public class AdAssetFeedSpec extends APINode {
   private List<EnumCallToActionTypes> mCallToActionTypes = null;
   @SerializedName("captions")
   private List<AdAssetFeedSpecCaption> mCaptions = null;
+  @SerializedName("carousels")
+  private List<Object> mCarousels = null;
   @SerializedName("descriptions")
   private List<AdAssetFeedSpecDescription> mDescriptions = null;
   @SerializedName("groups")
@@ -104,7 +106,7 @@ public class AdAssetFeedSpec extends APINode {
         context.log("[Warning] When parsing response, object is not consistent with JSON:");
         context.log("[JSON]" + o1);
         context.log("[Object]" + o2);
-      };
+      }
     }
     adAssetFeedSpec.context = context;
     adAssetFeedSpec.rawValue = json;
@@ -307,6 +309,15 @@ public class AdAssetFeedSpec extends APINode {
     this.mCaptions = AdAssetFeedSpecCaption.getGson().fromJson(value, type);
     return this;
   }
+  public List<Object> getFieldCarousels() {
+    return mCarousels;
+  }
+
+  public AdAssetFeedSpec setFieldCarousels(List<Object> value) {
+    this.mCarousels = value;
+    return this;
+  }
+
   public List<AdAssetFeedSpecDescription> getFieldDescriptions() {
     return mDescriptions;
   }
@@ -509,7 +520,7 @@ public class AdAssetFeedSpec extends APINode {
       VALUE_WHATSAPP_MESSAGE("WHATSAPP_MESSAGE"),
       @SerializedName("WOODHENGE_SUPPORT")
       VALUE_WOODHENGE_SUPPORT("WOODHENGE_SUPPORT"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -545,6 +556,7 @@ public class AdAssetFeedSpec extends APINode {
     this.mBodies = instance.mBodies;
     this.mCallToActionTypes = instance.mCallToActionTypes;
     this.mCaptions = instance.mCaptions;
+    this.mCarousels = instance.mCarousels;
     this.mDescriptions = instance.mDescriptions;
     this.mGroups = instance.mGroups;
     this.mImages = instance.mImages;

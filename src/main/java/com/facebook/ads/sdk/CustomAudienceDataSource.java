@@ -82,7 +82,7 @@ public class CustomAudienceDataSource extends APINode {
         context.log("[Warning] When parsing response, object is not consistent with JSON:");
         context.log("[JSON]" + o1);
         context.log("[Object]" + o2);
-      };
+      }
     }
     customAudienceDataSource.context = context;
     customAudienceDataSource.rawValue = json;
@@ -346,7 +346,7 @@ public class CustomAudienceDataSource extends APINode {
       VALUE_WEB_PIXEL_HITS("WEB_PIXEL_HITS"),
       @SerializedName("WEB_PIXEL_HITS_CUSTOM_AUDIENCE_USERS")
       VALUE_WEB_PIXEL_HITS_CUSTOM_AUDIENCE_USERS("WEB_PIXEL_HITS_CUSTOM_AUDIENCE_USERS"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -377,7 +377,7 @@ public class CustomAudienceDataSource extends APINode {
       VALUE_THIRD_PARTY_IMPORTED("THIRD_PARTY_IMPORTED"),
       @SerializedName("UNKNOWN")
       VALUE_UNKNOWN("UNKNOWN"),
-      NULL(null);
+      ;
 
       private String value;
 

@@ -163,7 +163,7 @@ public class BusinessRoleRequest extends APINode {
         context.log("[Warning] When parsing response, object is not consistent with JSON:");
         context.log("[JSON]" + o1);
         context.log("[Object]" + o2);
-      };
+      }
     }
     businessRoleRequest.context = context;
     businessRoleRequest.rawValue = json;
@@ -811,7 +811,7 @@ public class BusinessRoleRequest extends APINode {
       VALUE_FINANCE_ANALYST("FINANCE_ANALYST"),
       @SerializedName("FINANCE_EDITOR")
       VALUE_FINANCE_EDITOR("FINANCE_EDITOR"),
-      NULL(null);
+      ;
 
       private String value;
 

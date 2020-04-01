@@ -90,7 +90,7 @@ public class AdRecommendation extends APINode {
         context.log("[Warning] When parsing response, object is not consistent with JSON:");
         context.log("[JSON]" + o1);
         context.log("[Object]" + o2);
-      };
+      }
     }
     adRecommendation.context = context;
     adRecommendation.rawValue = json;
@@ -297,7 +297,7 @@ public class AdRecommendation extends APINode {
       VALUE_LOW("LOW"),
       @SerializedName("MEDIUM")
       VALUE_MEDIUM("MEDIUM"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -318,7 +318,7 @@ public class AdRecommendation extends APINode {
       VALUE_LOW("LOW"),
       @SerializedName("MEDIUM")
       VALUE_MEDIUM("MEDIUM"),
-      NULL(null);
+      ;
 
       private String value;
 

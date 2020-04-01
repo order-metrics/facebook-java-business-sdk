@@ -65,12 +65,16 @@ public class MusicVideoCopyright extends APINode {
   private Boolean mInConflict = null;
   @SerializedName("isrc")
   private String mIsrc = null;
+  @SerializedName("match_rule")
+  private VideoCopyrightRule mMatchRule = null;
   @SerializedName("ownership_countries")
   private List<String> mOwnershipCountries = null;
   @SerializedName("reference_file_status")
   private String mReferenceFileStatus = null;
   @SerializedName("ridge_monitoring_status")
   private String mRidgeMonitoringStatus = null;
+  @SerializedName("tags")
+  private List<String> mTags = null;
   @SerializedName("update_time")
   private String mUpdateTime = null;
   @SerializedName("video_asset")
@@ -159,7 +163,7 @@ public class MusicVideoCopyright extends APINode {
         context.log("[Warning] When parsing response, object is not consistent with JSON:");
         context.log("[JSON]" + o1);
         context.log("[Object]" + o2);
-      };
+      }
     }
     musicVideoCopyright.context = context;
     musicVideoCopyright.rawValue = json;
@@ -313,6 +317,13 @@ public class MusicVideoCopyright extends APINode {
     return mIsrc;
   }
 
+  public VideoCopyrightRule getFieldMatchRule() {
+    if (mMatchRule != null) {
+      mMatchRule.context = getContext();
+    }
+    return mMatchRule;
+  }
+
   public List<String> getFieldOwnershipCountries() {
     return mOwnershipCountries;
   }
@@ -323,6 +334,10 @@ public class MusicVideoCopyright extends APINode {
 
   public String getFieldRidgeMonitoringStatus() {
     return mRidgeMonitoringStatus;
+  }
+
+  public List<String> getFieldTags() {
+    return mTags;
   }
 
   public String getFieldUpdateTime() {
@@ -359,9 +374,11 @@ public class MusicVideoCopyright extends APINode {
       "id",
       "in_conflict",
       "isrc",
+      "match_rule",
       "ownership_countries",
       "reference_file_status",
       "ridge_monitoring_status",
+      "tags",
       "update_time",
       "video_asset",
       "whitelisted_fb_users",
@@ -492,6 +509,13 @@ public class MusicVideoCopyright extends APINode {
       this.requestField("isrc", value);
       return this;
     }
+    public APIRequestGet requestMatchRuleField () {
+      return this.requestMatchRuleField(true);
+    }
+    public APIRequestGet requestMatchRuleField (boolean value) {
+      this.requestField("match_rule", value);
+      return this;
+    }
     public APIRequestGet requestOwnershipCountriesField () {
       return this.requestOwnershipCountriesField(true);
     }
@@ -511,6 +535,13 @@ public class MusicVideoCopyright extends APINode {
     }
     public APIRequestGet requestRidgeMonitoringStatusField (boolean value) {
       this.requestField("ridge_monitoring_status", value);
+      return this;
+    }
+    public APIRequestGet requestTagsField () {
+      return this.requestTagsField(true);
+    }
+    public APIRequestGet requestTagsField (boolean value) {
+      this.requestField("tags", value);
       return this;
     }
     public APIRequestGet requestUpdateTimeField () {
@@ -563,9 +594,11 @@ public class MusicVideoCopyright extends APINode {
     this.mId = instance.mId;
     this.mInConflict = instance.mInConflict;
     this.mIsrc = instance.mIsrc;
+    this.mMatchRule = instance.mMatchRule;
     this.mOwnershipCountries = instance.mOwnershipCountries;
     this.mReferenceFileStatus = instance.mReferenceFileStatus;
     this.mRidgeMonitoringStatus = instance.mRidgeMonitoringStatus;
+    this.mTags = instance.mTags;
     this.mUpdateTime = instance.mUpdateTime;
     this.mVideoAsset = instance.mVideoAsset;
     this.mWhitelistedFbUsers = instance.mWhitelistedFbUsers;

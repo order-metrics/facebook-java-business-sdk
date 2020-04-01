@@ -145,7 +145,7 @@ public class BusinessOwnedObjectOnBehalfOfRequest extends APINode {
         context.log("[Warning] When parsing response, object is not consistent with JSON:");
         context.log("[JSON]" + o1);
         context.log("[Object]" + o2);
-      };
+      }
     }
     businessOwnedObjectOnBehalfOfRequest.context = context;
     businessOwnedObjectOnBehalfOfRequest.rawValue = json;
@@ -568,7 +568,9 @@ public class BusinessOwnedObjectOnBehalfOfRequest extends APINode {
       VALUE_EXPIRED("EXPIRED"),
       @SerializedName("IN_PROGRESS")
       VALUE_IN_PROGRESS("IN_PROGRESS"),
-      NULL(null);
+      @SerializedName("PENDING")
+      VALUE_PENDING("PENDING"),
+      ;
 
       private String value;
 

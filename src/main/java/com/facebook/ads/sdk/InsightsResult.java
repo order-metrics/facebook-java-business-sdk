@@ -90,7 +90,7 @@ public class InsightsResult extends APINode {
         context.log("[Warning] When parsing response, object is not consistent with JSON:");
         context.log("[JSON]" + o1);
         context.log("[Object]" + o2);
-      };
+      }
     }
     insightsResult.context = context;
     insightsResult.rawValue = json;
@@ -285,23 +285,6 @@ public class InsightsResult extends APINode {
 
 
 
-  public static enum EnumMetric {
-      @SerializedName("messages_sent")
-      VALUE_MESSAGES_SENT("messages_sent"),
-      NULL(null);
-
-      private String value;
-
-      private EnumMetric(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
   public static enum EnumDatePreset {
       @SerializedName("last_14d")
       VALUE_LAST_14D("last_14d"),
@@ -341,7 +324,7 @@ public class InsightsResult extends APINode {
       VALUE_TODAY("today"),
       @SerializedName("yesterday")
       VALUE_YESTERDAY("yesterday"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -366,7 +349,7 @@ public class InsightsResult extends APINode {
       VALUE_MONTH("month"),
       @SerializedName("week")
       VALUE_WEEK("week"),
-      NULL(null);
+      ;
 
       private String value;
 

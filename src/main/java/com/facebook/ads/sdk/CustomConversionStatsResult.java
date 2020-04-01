@@ -82,7 +82,7 @@ public class CustomConversionStatsResult extends APINode {
         context.log("[Warning] When parsing response, object is not consistent with JSON:");
         context.log("[JSON]" + o1);
         context.log("[Object]" + o2);
-      };
+      }
     }
     customConversionStatsResult.context = context;
     customConversionStatsResult.rawValue = json;
@@ -258,7 +258,7 @@ public class CustomConversionStatsResult extends APINode {
       VALUE_URL("url"),
       @SerializedName("usd_amount")
       VALUE_USD_AMOUNT("usd_amount"),
-      NULL(null);
+      ;
 
       private String value;
 

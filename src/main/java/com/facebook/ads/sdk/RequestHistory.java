@@ -90,7 +90,7 @@ public class RequestHistory extends APINode {
         context.log("[Warning] When parsing response, object is not consistent with JSON:");
         context.log("[JSON]" + o1);
         context.log("[Object]" + o2);
-      };
+      }
     }
     requestHistory.context = context;
     requestHistory.rawValue = json;
@@ -292,7 +292,7 @@ public class RequestHistory extends APINode {
       VALUE_GET("GET"),
       @SerializedName("POST")
       VALUE_POST("POST"),
-      NULL(null);
+      ;
 
       private String value;
 

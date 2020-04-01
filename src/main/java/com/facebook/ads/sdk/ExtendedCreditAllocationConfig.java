@@ -155,7 +155,7 @@ public class ExtendedCreditAllocationConfig extends APINode {
         context.log("[Warning] When parsing response, object is not consistent with JSON:");
         context.log("[JSON]" + o1);
         context.log("[Object]" + o2);
-      };
+      }
     }
     extendedCreditAllocationConfig.context = context;
     extendedCreditAllocationConfig.rawValue = json;
@@ -290,6 +290,10 @@ public class ExtendedCreditAllocationConfig extends APINode {
 
   public APIRequestGet get() {
     return new APIRequestGet(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestUpdate update() {
+    return new APIRequestUpdate(this.getPrefixedId().toString(), context);
   }
 
 
@@ -635,6 +639,120 @@ public class ExtendedCreditAllocationConfig extends APINode {
     }
   }
 
+  public static class APIRequestUpdate extends APIRequest<ExtendedCreditAllocationConfig> {
+
+    ExtendedCreditAllocationConfig lastResponse = null;
+    @Override
+    public ExtendedCreditAllocationConfig getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "amount",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public ExtendedCreditAllocationConfig parseResponse(String response, String header) throws APIException {
+      return ExtendedCreditAllocationConfig.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public ExtendedCreditAllocationConfig execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public ExtendedCreditAllocationConfig execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<ExtendedCreditAllocationConfig> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<ExtendedCreditAllocationConfig> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, ExtendedCreditAllocationConfig>() {
+           public ExtendedCreditAllocationConfig apply(ResponseWrapper result) {
+             try {
+               return APIRequestUpdate.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestUpdate(String nodeId, APIContext context) {
+      super(context, nodeId, "/", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestUpdate setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestUpdate setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestUpdate setAmount (Object amount) {
+      this.setParam("amount", amount);
+      return this;
+    }
+    public APIRequestUpdate setAmount (String amount) {
+      this.setParam("amount", amount);
+      return this;
+    }
+
+    public APIRequestUpdate requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestUpdate requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestUpdate requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestUpdate requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestUpdate requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestUpdate requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static enum EnumLiabilityType {
       @SerializedName("MSA")
       VALUE_MSA("MSA"),
@@ -642,7 +760,7 @@ public class ExtendedCreditAllocationConfig extends APINode {
       VALUE_NORMAL("Normal"),
       @SerializedName("Sequential")
       VALUE_SEQUENTIAL("Sequential"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -661,7 +779,7 @@ public class ExtendedCreditAllocationConfig extends APINode {
       VALUE_AUTH("AUTH"),
       @SerializedName("FIXED")
       VALUE_FIXED("FIXED"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -680,7 +798,7 @@ public class ExtendedCreditAllocationConfig extends APINode {
       VALUE_ADVERTISER("Advertiser"),
       @SerializedName("Agency")
       VALUE_AGENCY("Agency"),
-      NULL(null);
+      ;
 
       private String value;
 

@@ -57,6 +57,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class AdPlacePageSetMetadata extends APINode {
   @SerializedName("audience")
   private Object mAudience = null;
+  @SerializedName("custom")
+  private Object mCustom = null;
   @SerializedName("extra_data")
   private String mExtraData = null;
   @SerializedName("fixed_radius")
@@ -82,7 +84,7 @@ public class AdPlacePageSetMetadata extends APINode {
         context.log("[Warning] When parsing response, object is not consistent with JSON:");
         context.log("[JSON]" + o1);
         context.log("[Object]" + o2);
-      };
+      }
     }
     adPlacePageSetMetadata.context = context;
     adPlacePageSetMetadata.rawValue = json;
@@ -221,6 +223,15 @@ public class AdPlacePageSetMetadata extends APINode {
     return this;
   }
 
+  public Object getFieldCustom() {
+    return mCustom;
+  }
+
+  public AdPlacePageSetMetadata setFieldCustom(Object value) {
+    this.mCustom = value;
+    return this;
+  }
+
   public String getFieldExtraData() {
     return mExtraData;
   }
@@ -257,6 +268,7 @@ public class AdPlacePageSetMetadata extends APINode {
 
   public AdPlacePageSetMetadata copyFrom(AdPlacePageSetMetadata instance) {
     this.mAudience = instance.mAudience;
+    this.mCustom = instance.mCustom;
     this.mExtraData = instance.mExtraData;
     this.mFixedRadius = instance.mFixedRadius;
     this.context = instance.context;

@@ -57,8 +57,6 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class Destination extends APINode {
   @SerializedName("address")
   private String mAddress = null;
-  @SerializedName("applinks")
-  private AppLinks mApplinks = null;
   @SerializedName("currency")
   private String mCurrency = null;
   @SerializedName("description")
@@ -161,7 +159,7 @@ public class Destination extends APINode {
         context.log("[Warning] When parsing response, object is not consistent with JSON:");
         context.log("[JSON]" + o1);
         context.log("[Object]" + o2);
-      };
+      }
     }
     destination.context = context;
     destination.rawValue = json;
@@ -299,13 +297,6 @@ public class Destination extends APINode {
     return mAddress;
   }
 
-  public AppLinks getFieldApplinks() {
-    if (mApplinks != null) {
-      mApplinks.context = getContext();
-    }
-    return mApplinks;
-  }
-
   public String getFieldCurrency() {
     return mCurrency;
   }
@@ -364,7 +355,6 @@ public class Destination extends APINode {
 
     public static final String[] FIELDS = {
       "address",
-      "applinks",
       "currency",
       "description",
       "destination_id",
@@ -474,13 +464,6 @@ public class Destination extends APINode {
       this.requestField("address", value);
       return this;
     }
-    public APIRequestGet requestApplinksField () {
-      return this.requestApplinksField(true);
-    }
-    public APIRequestGet requestApplinksField (boolean value) {
-      this.requestField("applinks", value);
-      return this;
-    }
     public APIRequestGet requestCurrencyField () {
       return this.requestCurrencyField(true);
     }
@@ -576,7 +559,6 @@ public class Destination extends APINode {
 
   public Destination copyFrom(Destination instance) {
     this.mAddress = instance.mAddress;
-    this.mApplinks = instance.mApplinks;
     this.mCurrency = instance.mCurrency;
     this.mDescription = instance.mDescription;
     this.mDestinationId = instance.mDestinationId;

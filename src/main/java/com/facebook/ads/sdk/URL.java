@@ -55,8 +55,6 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  *
  */
 public class URL extends APINode {
-  @SerializedName("app_links")
-  private AppLinks mAppLinks = null;
   @SerializedName("development_instant_article")
   private InstantArticle mDevelopmentInstantArticle = null;
   @SerializedName("engagement")
@@ -69,6 +67,8 @@ public class URL extends APINode {
   private Object mOgObject = null;
   @SerializedName("ownership_permissions")
   private Object mOwnershipPermissions = null;
+  @SerializedName("scopes")
+  private Object mScopes = null;
   protected static Gson gson = null;
 
   URL() {
@@ -149,7 +149,7 @@ public class URL extends APINode {
         context.log("[Warning] When parsing response, object is not consistent with JSON:");
         context.log("[JSON]" + o1);
         context.log("[Object]" + o2);
-      };
+      }
     }
     url.context = context;
     url.rawValue = json;
@@ -287,13 +287,6 @@ public class URL extends APINode {
   }
 
 
-  public AppLinks getFieldAppLinks() {
-    if (mAppLinks != null) {
-      mAppLinks.context = getContext();
-    }
-    return mAppLinks;
-  }
-
   public InstantArticle getFieldDevelopmentInstantArticle() {
     if (mDevelopmentInstantArticle != null) {
       mDevelopmentInstantArticle.context = getContext();
@@ -324,6 +317,10 @@ public class URL extends APINode {
     return mOwnershipPermissions;
   }
 
+  public Object getFieldScopes() {
+    return mScopes;
+  }
+
 
 
   public static class APIRequestGet extends APIRequest<URL> {
@@ -337,13 +334,13 @@ public class URL extends APINode {
     };
 
     public static final String[] FIELDS = {
-      "app_links",
       "development_instant_article",
       "engagement",
       "id",
       "instant_article",
       "og_object",
       "ownership_permissions",
+      "scopes",
     };
 
     @Override
@@ -435,13 +432,6 @@ public class URL extends APINode {
       return this;
     }
 
-    public APIRequestGet requestAppLinksField () {
-      return this.requestAppLinksField(true);
-    }
-    public APIRequestGet requestAppLinksField (boolean value) {
-      this.requestField("app_links", value);
-      return this;
-    }
     public APIRequestGet requestDevelopmentInstantArticleField () {
       return this.requestDevelopmentInstantArticleField(true);
     }
@@ -484,6 +474,13 @@ public class URL extends APINode {
       this.requestField("ownership_permissions", value);
       return this;
     }
+    public APIRequestGet requestScopesField () {
+      return this.requestScopesField(true);
+    }
+    public APIRequestGet requestScopesField (boolean value) {
+      this.requestField("scopes", value);
+      return this;
+    }
   }
 
   public static class APIRequestUpdate extends APIRequest<URL> {
@@ -494,8 +491,10 @@ public class URL extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "blacklist",
       "hmac",
       "locale",
+      "scopes",
       "ts",
     };
 
@@ -555,6 +554,15 @@ public class URL extends APINode {
     }
 
 
+    public APIRequestUpdate setBlacklist (Boolean blacklist) {
+      this.setParam("blacklist", blacklist);
+      return this;
+    }
+    public APIRequestUpdate setBlacklist (String blacklist) {
+      this.setParam("blacklist", blacklist);
+      return this;
+    }
+
     public APIRequestUpdate setHmac (String hmac) {
       this.setParam("hmac", hmac);
       return this;
@@ -566,6 +574,15 @@ public class URL extends APINode {
     }
     public APIRequestUpdate setLocale (String locale) {
       this.setParam("locale", locale);
+      return this;
+    }
+
+    public APIRequestUpdate setScopes (List<URL.EnumScopes> scopes) {
+      this.setParam("scopes", scopes);
+      return this;
+    }
+    public APIRequestUpdate setScopes (String scopes) {
+      this.setParam("scopes", scopes);
       return this;
     }
 
@@ -612,6 +629,25 @@ public class URL extends APINode {
 
   }
 
+  public static enum EnumScopes {
+      @SerializedName("NEWS_TAB")
+      VALUE_NEWS_TAB("NEWS_TAB"),
+      @SerializedName("NEWS_TAB_DEV_ENV")
+      VALUE_NEWS_TAB_DEV_ENV("NEWS_TAB_DEV_ENV"),
+      ;
+
+      private String value;
+
+      private EnumScopes(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
 
   synchronized /*package*/ static Gson getGson() {
     if (gson != null) {
@@ -627,13 +663,13 @@ public class URL extends APINode {
   }
 
   public URL copyFrom(URL instance) {
-    this.mAppLinks = instance.mAppLinks;
     this.mDevelopmentInstantArticle = instance.mDevelopmentInstantArticle;
     this.mEngagement = instance.mEngagement;
     this.mId = instance.mId;
     this.mInstantArticle = instance.mInstantArticle;
     this.mOgObject = instance.mOgObject;
     this.mOwnershipPermissions = instance.mOwnershipPermissions;
+    this.mScopes = instance.mScopes;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

@@ -151,7 +151,7 @@ public class PlaceTopic extends APINode {
         context.log("[Warning] When parsing response, object is not consistent with JSON:");
         context.log("[JSON]" + o1);
         context.log("[Object]" + o2);
-      };
+      }
     }
     placeTopic.context = context;
     placeTopic.rawValue = json;
@@ -506,7 +506,7 @@ public class PlaceTopic extends APINode {
       VALUE_48("48"),
       @SerializedName("72")
       VALUE_72("72"),
-      NULL(null);
+      ;
 
       private String value;
 

@@ -82,7 +82,7 @@ public class AdRuleEvaluationSpec extends APINode {
         context.log("[Warning] When parsing response, object is not consistent with JSON:");
         context.log("[JSON]" + o1);
         context.log("[Object]" + o2);
-      };
+      }
     }
     adRuleEvaluationSpec.context = context;
     adRuleEvaluationSpec.rawValue = json;
@@ -256,7 +256,7 @@ public class AdRuleEvaluationSpec extends APINode {
       VALUE_SCHEDULE("SCHEDULE"),
       @SerializedName("TRIGGER")
       VALUE_TRIGGER("TRIGGER"),
-      NULL(null);
+      ;
 
       private String value;
 

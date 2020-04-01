@@ -149,7 +149,7 @@ public class VideoCopyrightRule extends APINode {
         context.log("[Warning] When parsing response, object is not consistent with JSON:");
         context.log("[JSON]" + o1);
         context.log("[Object]" + o2);
-      };
+      }
     }
     videoCopyrightRule.context = context;
     videoCopyrightRule.rawValue = json;
@@ -483,7 +483,7 @@ public class VideoCopyrightRule extends APINode {
       VALUE_RULES_SELECTOR("RULES_SELECTOR"),
       @SerializedName("RULES_TAB")
       VALUE_RULES_TAB("RULES_TAB"),
-      NULL(null);
+      ;
 
       private String value;
 

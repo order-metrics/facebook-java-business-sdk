@@ -84,7 +84,7 @@ public class AdAccountDeliveryEstimate extends APINode {
         context.log("[Warning] When parsing response, object is not consistent with JSON:");
         context.log("[JSON]" + o1);
         context.log("[Object]" + o2);
-      };
+      }
     }
     adAccountDeliveryEstimate.context = context;
     adAccountDeliveryEstimate.rawValue = json;
@@ -306,9 +306,9 @@ public class AdAccountDeliveryEstimate extends APINode {
       VALUE_TWO_SECOND_CONTINUOUS_VIDEO_VIEWS("TWO_SECOND_CONTINUOUS_VIDEO_VIEWS"),
       @SerializedName("VALUE")
       VALUE_VALUE("VALUE"),
-      @SerializedName("VIDEO_VIEWS")
-      VALUE_VIDEO_VIEWS("VIDEO_VIEWS"),
-      NULL(null);
+      @SerializedName("VISIT_INSTAGRAM_PROFILE")
+      VALUE_VISIT_INSTAGRAM_PROFILE("VISIT_INSTAGRAM_PROFILE"),
+      ;
 
       private String value;
 

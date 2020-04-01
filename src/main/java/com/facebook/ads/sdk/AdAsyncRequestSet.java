@@ -167,7 +167,7 @@ public class AdAsyncRequestSet extends APINode {
         context.log("[Warning] When parsing response, object is not consistent with JSON:");
         context.log("[JSON]" + o1);
         context.log("[Object]" + o2);
-      };
+      }
     }
     adAsyncRequestSet.context = context;
     adAsyncRequestSet.rawValue = json;
@@ -1032,7 +1032,7 @@ public class AdAsyncRequestSet extends APINode {
       VALUE_OFF("OFF"),
       @SerializedName("ON_COMPLETE")
       VALUE_ON_COMPLETE("ON_COMPLETE"),
-      NULL(null);
+      ;
 
       private String value;
 
@@ -1053,7 +1053,7 @@ public class AdAsyncRequestSet extends APINode {
       VALUE_SENDING("SENDING"),
       @SerializedName("SENT")
       VALUE_SENT("SENT"),
-      NULL(null);
+      ;
 
       private String value;
 
